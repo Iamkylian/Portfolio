@@ -19,7 +19,7 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Projet 1",
+    title: "Project 1",
     image: image1,
     description: "Description détaillée du projet 1.",
     technologies: ["React", "Node.js", "MongoDB"],
@@ -27,7 +27,7 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Projet 2",
+    title: "Project 2",
     image: image1,
     description: "Description détaillée du projet 2.",
     technologies: ["Vue.js", "Express", "PostgreSQL"],
@@ -94,6 +94,7 @@ const Portfolio: React.FC = () => {
     <section id="portfolio" className="py-20 bg-gray-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 text-center">My Portfolio</h2>
+        <div className="w-40 h-1 bg-blue-500 mx-auto mb-20 rounded-full"></div>
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           initial={{ opacity: 0, y: 20 }}

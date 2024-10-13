@@ -9,7 +9,7 @@ const Intro = () => {
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
           Looking for a developer?
         </h1>
-        <div className="w-16 h-1 bg-blue-500 mx-auto mb-6"></div>
+        <div className="w-20 h-1 bg-blue-500 mx-auto mb-6 rounded-full"></div>
         <p className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed text-white">
           Over the years, I&apos;ve developed a wide range of skills and acquired a wealth of experience, 
           which today enables me to approach projects with a global vision and in-depth expertise. 

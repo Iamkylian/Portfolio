@@ -4,6 +4,7 @@ import React from "react";
 import CV from "./CV";
 import Intro from "./Intro";
 import Portfolio from "./Portfolio";
+import Contact from "./Contact";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Intro />
       <CV />
       <Portfolio />
+      <Contact />
       <Footer />
     </div>
   );

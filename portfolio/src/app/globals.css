@@ -38,6 +38,7 @@ html {
   color: #000; 
   font-size: 18px; 
   padding: 5px 0;
+  font-weight: 600;
 }
 
 .nav-link::after {
@@ -65,3 +66,39 @@ html {
   background-color: #212529;
 }
 
+
+/* CONTACT - Contact.tsx */
+
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #333;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.icon-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.icon-link:hover {
+  color: #0077b5; /* Couleur au survol, vous pouvez la changer */
+}
+
+.icon-link:hover::before {
+  border-color: #0077b5; /* Même couleur que celle du survol */
+  transform: scale(1.1);
+}
