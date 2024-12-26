@@ -35,7 +35,7 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-8">Contact</h2>
+        <h2 className="text-3xl font-bold mb-8 color-black">Contact</h2>
         <div className="w-40 h-1 bg-blue-500 mx-auto mb-20 rounded-full"></div>
         {error && (
           <div className="mb-6 max-w-md mx-auto p-4 border-2 border-red-500 bg-red-100 bg-opacity-50 rounded-lg">
