@@ -19,14 +19,14 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex items-center space-x-10">
-          <Link href="#cv" className="nav-link">
-            CV
+          <Link href="#education" className="nav-link">
+            Education
           </Link>
-          <Link href="#formation" className="nav-link">
-            Formation
+          <Link href="#skills" className="nav-link">
+            Compétences
           </Link>
-          <Link href="#portfolio" className="nav-link">
-            Portfolio
+          <Link href="#projects" className="nav-link">
+            Projets
           </Link>
           <Link href="#contact" className="nav-link">
             Contact

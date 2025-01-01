@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import image1 from '../images/image1.png';
+import image1 from '../../../public/images/image1.png';
+
 
 // Type pour un projet
 interface Project {
@@ -38,24 +39,24 @@ const projects: Project[] = [
 
 const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ project, onClick }) => (
   <motion.div 
-    className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={onClick}
+  className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={onClick}
   >
     <Image src={project.image} alt={project.title} width={300} height={200} className="w-full h-48 object-cover" />
     <div className="p-4">
-      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+      <h3 className="text-xl font-semibold mb-2 text-gray-600">{project.title}</h3>
     </div>
   </motion.div>
 );
 
 const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ project, onClose }) => (
   <motion.div 
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
   >
     <motion.div 
       initial={{ scale: 0.8, opacity: 0 }}
@@ -63,9 +64,9 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
       exit={{ scale: 0.8, opacity: 0 }}
       transition={{ type: "spring", damping: 25, stiffness: 500 }}
       className="bg-white rounded-lg max-w-2xl w-full"
-    >
+      >
       <div className="p-6">
-        <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-600">{project.title}</h2>
         <Image src={project.image} alt={project.title} width={600} height={400} className="w-full h-64 object-cover mb-4 rounded" />
         <p className="mb-4">{project.description}</p>
         <div className="mb-4">
@@ -89,12 +90,13 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
 
 const Portfolio: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
-    <section id="portfolio" className="py-20 bg-gray-100">
+    <section id="projects" className="py-20 bg-gray-100" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-center">My Portfolio</h2>
-        <div className="w-40 h-1 bg-blue-500 mx-auto mb-20 rounded-full"></div>
+        <h2 className="text-3xl font-bold mb-8 text-center text-gray-600">Mes Projets</h2>
+        <div className="w-40 h-1 mx-auto mb-20 rounded-full transition-colors duration-300" style={{ backgroundColor: isHovered ? '#0077b5' : '#6b7280'}}></div>
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           initial={{ opacity: 0, y: 20 }}
