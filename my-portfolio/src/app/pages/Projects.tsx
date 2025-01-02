@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import image1 from '../../../public/images/image1.png';
+import imageApplicationRAG from '../../../public/images/imageApplicationRAG.png';
 
 
 // Type pour un projet
@@ -20,21 +20,20 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Project 1",
-    image: image1,
-    description: "Description détaillée du projet 1.",
-    technologies: ["React", "Node.js", "MongoDB"],
-    link: "https://github.com/votre-username/projet1"
+    title: "Application basée sur le systéme de RAG",
+    image: imageApplicationRAG,
+    description: "Ce projet est une application basé sur le concept du RAG dans le domaine de l'IA générative. Cette application permet à l'utilisateur d'uploader des fichiers PDF et d'effeectuer des requêtes d'interrogations sur ceux-ci.",
+    technologies: ["React", "Django", "ChromaDB", "Langchain", "Ollama"],
+    link: "https://github.com/Iamkylian/rag-qa-system"
   },
   {
     id: 2,
     title: "Project 2",
-    image: image1,
+    image: imageApplicationRAG,
     description: "Description détaillée du projet 2.",
     technologies: ["Vue.js", "Express", "PostgreSQL"],
-    link: "https://github.com/votre-username/projet2"
-  },
-  // ... autres projets
+    link: "https://github.com/Iamkylian/rag-qa-system"
+  }
 ];
 
 const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ project, onClick }) => (
@@ -44,7 +43,7 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
   whileTap={{ scale: 0.95 }}
   onClick={onClick}
   >
-    <Image src={project.image} alt={project.title} width={300} height={200} className="w-full h-48 object-cover" />
+    <Image src={project.image} alt={project.title} width={300} height={200} draggable="false" className="w-full h-48 object-cover" />
     <div className="p-4">
       <h3 className="text-xl font-semibold mb-2 text-gray-600">{project.title}</h3>
     </div>
@@ -67,13 +66,13 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
       >
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-4 text-gray-600">{project.title}</h2>
-        <Image src={project.image} alt={project.title} width={600} height={400} className="w-full h-64 object-cover mb-4 rounded" />
-        <p className="mb-4">{project.description}</p>
+        <Image src={project.image} alt={project.title} width={600} height={400} draggable="false" className="w-full h-64 object-cover mb-4 rounded" />
+        <p className="mb-4 text-gray-600">{project.description}</p>
         <div className="mb-4">
-          <h3 className="font-semibold mb-2">Technologies used :</h3>
+          <h3 className="text-gray-600 font-semibold mb-2">Technologies used :</h3>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech, index) => (
-              <span key={index} className="bg-gray-200 px-2 py-1 rounded text-sm">{tech}</span>
+              <span key={index} className="bg-gray-500 px-2 py-1 rounded text-sm">{tech}</span>
             ))}
           </div>
         </div>

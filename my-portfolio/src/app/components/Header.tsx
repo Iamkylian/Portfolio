@@ -1,14 +1,17 @@
-// components/Header.tsx
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
-    // ... (le reste de votre code useEffect reste inchangé)
+    // ... (votre code useEffect existant)
   }, []);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
@@ -18,20 +21,31 @@ const Header = () => {
             KYLIAN GACHET
           </Link>
         </div>
-        <div className="flex items-center space-x-10">
-          <Link href="#education" className="nav-link">
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="focus:outline-none">
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+        <div
+          className={`md:flex items-center space-x-10 ${
+            isOpen
+              ? "flex flex-col absolute top-full left-0 right-0 bg-white p-4"
+              : "hidden"
+          }`}
+        >
+          <Link href="#education" className="nav-link block py-2">
             Education
           </Link>
-          <Link href="#skills" className="nav-link">
+          <Link href="#skills" className="nav-link block py-2">
             Compétences
           </Link>
-          <Link href="#projects" className="nav-link">
+          <Link href="#projects" className="nav-link block py-2">
             Projets
           </Link>
-          <Link href="#contact" className="nav-link">
+          <Link href="#contact" className="nav-link block py-2">
             Contact
           </Link>
-          <div className="flex space-x-4 ml-auto">
+          <div className="flex space-x-4 mt-4 md:mt-0">
             <a
               href="https://github.com/Iamkylian"
               target="_blank"

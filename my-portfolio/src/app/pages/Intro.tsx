@@ -82,9 +82,50 @@ export default function Intro() {
           ))}
         </div>
       </div>
-
+        {/*  
+        <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 32 200 200">
+            <g className="branches" stroke="rgba(0,0,0,0.6)" strokeWidth="1" fill="none">
+              <motion.path
+                d="M100 100 L150 50"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, ease: "easeInOut" }}
+              />
+              <motion.path
+                d="M100 100 L50 50"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
+              />
+              <motion.path
+                d="M100 100 L160 100"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, ease: "easeInOut", delay: 1 }}
+              />
+              <motion.path
+                d="M100 100 L40 100"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, ease: "easeInOut", delay: 1.5 }}
+              />
+              <motion.path
+                d="M100 100 L150 150"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, ease: "easeInOut", delay: 2 }}
+              />
+              <motion.path
+                d="M100 100 L50 150"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, ease: "easeInOut", delay: 2.5 }}
+              />
+            </g>
+          </svg>
+          */}
       <div className="container mx-auto px-6 z-10 text-center">
-        <Image src="/images/PP.jpg" alt="Kylian Gachet" width={200} height={200} className="rounded-full mx-auto mb-8 border border-silver shadow-lg" />
+        <Image src="/images/PP.jpg" alt="Kylian Gachet" width={200} height={200} draggable="false" className="rounded-full mx-auto mb-8 border border-silver shadow-lg" />
         <h1 className="text-4xl text-gray-800 font-bold mb-4">Kylian Gachet</h1>
         
         <motion.p 
@@ -103,6 +144,14 @@ export default function Intro() {
           qui me permet aujourd'hui d'aborder les projets avec une vision globale et réfléchie. 
           J'ai également eu l'occasion de travailler sur des projets complexes, tant en termes de développement technique que de gestion.
         </p>
+
+        {/* Bouton de téléchargement du CV */}
+        <a href="/assets/CV_Kylian_GACHET.pdf" download>
+          <button className="mt-8 px-6 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition duration-300">
+            Mon CV
+          </button>
+        </a>
+
       </div>
     </section>
   );
