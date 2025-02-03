@@ -16,10 +16,7 @@ const Footer = () => (
           À propos
         </Link>
         <span className="text-gray-400">|</span>
-        <Link
-          href="/privacy-policy"
-          className="text-gray-400 hover:text-white"
-        >
+        <Link href="/privacy-policy" className="text-gray-400 hover:text-white">
           Politique de confidentialité
         </Link>
         <span className="text-gray-400">|</span>

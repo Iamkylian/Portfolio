@@ -1,28 +1,11 @@
 // app/layout.tsx
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import localFont from "next/font/local";
+import React, { useEffect, useState } from "react";
+import { geistSans, geistMono, novaMono } from "./fonts";
 import "./globals.css";
-import { metadata } from './metadata';
+import { metadata } from "./metadata";
 import { FaArrowCircleUp } from "react-icons/fa";
-
-// Chargement des polices locales
-const geistSans = localFont({
-  src: "./../../public/fonts/GeistVF.woff", // Chemin relatif à partir de public
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./../../public/fonts/GeistMonoVF.woff", // Chemin relatif à partir de public
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-const novaMono = localFont({
-  src: "./../../public/fonts/NovaMono-Regular.ttf", // Chemin relatif à partir de public
-  variable: "--font-nova-mono",
-  weight: "100 900",
-});
 
 // Composant de mise en page racine
 export default function RootLayout({
@@ -37,24 +20,25 @@ export default function RootLayout({
       setIsVisible(window.scrollY > 100); // Affiche le bouton si défilé de plus de 100px
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${novaMono.variable} antialiased`}
+        className={`${geistSans} ${geistMono} ${novaMono} antialiased`}
       >
+        
         {children}
 
-        {/* Bouton Retour en haut */}
+        {/* Bouton Retour en haut de page */}
         {isVisible && (
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="fixed bottom-5 right-5 bg-gray-500 text-white rounded-full p-3 shadow-lg hover:bg-blue-500 transition duration-300 ease-in-out"
             title="Haut de page"
           >

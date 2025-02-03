@@ -1,7 +1,13 @@
-import type { NextConfig } from "next";
+import type webpack from 'webpack';
 
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  basePath: '/Portfolio',
+  assetPrefix: '/Portfolio/',
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
