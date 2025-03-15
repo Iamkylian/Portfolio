@@ -43,12 +43,16 @@ export function ProjectPage({ slug }: { slug: string }) {
       <main className="pt-24 bg-gray-50 min-h-screen">
         {/* Hero section */}
         <div className="relative h-[40vh] md:h-[50vh] w-full bg-gray-800">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            style={{ objectFit: "cover" }}
-          />
+          {project.image && typeof project.image === 'string' ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gray-700"></div>
+          )}
           <div className="absolute inset-0 bg-black/50 flex flex-col justify-end">
             <div className="container mx-auto px-6 py-8">
               <motion.div

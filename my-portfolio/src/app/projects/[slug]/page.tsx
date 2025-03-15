@@ -3,10 +3,6 @@ import { projects } from "../../projects";
 import { generateProjectMetadata } from "../../metadata";
 import { Metadata } from "next";
 
-interface PageProps {
-  params: { slug: string };
-}
-
 export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
@@ -14,7 +10,11 @@ export async function generateStaticParams() {
 }
 
 // Génère dynamiquement les métadonnées pour chaque page de projet
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { slug: string } 
+}): Promise<Metadata> {
   const { slug } = params;
   const project = projects.find((p) => p.slug === slug);
   
@@ -33,7 +33,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   );
 }
 
-export default function Page({ params }: PageProps) {
+export default function Page({ 
+  params 
+}: { 
+  params: { slug: string } 
+}) {
   const { slug } = params;
   return <ProjectPage slug={slug} />;
 } 

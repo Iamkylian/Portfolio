@@ -1,12 +1,9 @@
-import imageApplicationRAG from '../../public/images/imageApplicationRAG.png';
-import imagePlaceholder from '../../public/images/placeholder-project.png';
-
 // Types
 export interface Project {
   id: number;
   title: string;
   slug: string;
-  image: any;
+  image: string;
   description: string;
   longDescription?: string;
   technologies: string[];
@@ -27,30 +24,28 @@ export const projects: Project[] = [
     id: 1,
     title: "Mémoire sur le RAG & Application pratique",
     slug: "memoire-rag-application",
-    image: imageApplicationRAG,
+    image: "/Portfolio/images/imageApplicationRAG.png",
     description:
       "Recherche approfondie sur le RAG (Retrieval-Augmented Generation) et développement d'une application permettant d'interroger des documents PDF en exploitant cette technologie d'IA générative.",
     longDescription:
-      "Ce projet combine un travail de recherche théorique et une implémentation pratique sur le RAG (Retrieval-Augmented Generation). Le mémoire analyse l'évolution des IA génératives et leurs limites actuelles, tout en explorant les concepts fondamentaux et techniques du RAG. L'application développée démontre concrètement ces principes en permettant aux utilisateurs d'interroger leurs propres documents PDF via une interface web intuitive.",
-    technologies: ["React", "Django", "ChromaDB", "pgVector", "Langchain", "Ollama", "Python", "HTML", "Tokenisation", "Embedding", "LLM"],
-    link: "https://github.com/Iamkylian/rag-qa-system",
+      "Ce projet comporte deux volets : un mémoire d'étude sur les mécanismes du RAG (Retrieval-Augmented Generation) et ses applications, ainsi qu'une mise en pratique concrète. L'application développée permet d'interroger des documents PDF en utilisant la technologie RAG qui combine recherche d'information contextuelle et génération de réponses par un LLM.",
+    technologies: ["Python", "FastAPI", "React", "TypeScript", "LangChain", "Ollama", "Vector Database", "AI/ML", "PDF Parsing"],
+    link: "https://github.com/Iamkylian/SAE-RAG-Client",
     skills: ["1", "2", "3"],
-    context: "Projet universitaire réalisé à l'IUT de Blagnac (novembre 2024 - décembre 2024) combinant un mémoire de recherche sur les systèmes de RAG et le développement d'une application démontrant leurs applications pratiques.",
+    context: "Projet universitaire réalisé pour la certification de développement (SAE S5.01).",
     objectives: [
-      "Analyser l'évolution des IA génératives et identifier leurs limites actuelles",
-      "Présenter les différents types d'IA (ANI, AGI, ASI) et leurs caractéristiques",
-      "Expliquer les mécanismes fondamentaux de l'IA: neurones artificiels, régression linéaire, etc.",
-      "Explorer en détail le concept du RAG: besoins initiaux et principes essentiels",
-      "Détailler les composants techniques du RAG: tokenisation, bases de données vectorielles, similarité cosinus",
-      "Développer une application démontrant concrètement l'utilisation du RAG",
-      "Évaluer les avantages, limites et cas d'usage du RAG dans différents domaines"
+      "Étudier en profondeur le fonctionnement du RAG et ses applications potentielles",
+      "Concevoir et développer une application permettant d'interroger intelligemment des documents",
+      "Implémenter un système de discussion contextuelle avec un modèle de langage",
+      "Optimiser la recherche et l'extraction d'informations par indexation vectorielle",
+      "Développer une interface intuitive pour visualiser et interagir avec les documents"
     ],
-    methodology: "Recherche bibliographique approfondie sur les IA génératives et le RAG. Implémentation pratique utilisant React pour le frontend, Django pour le backend, ChromaDB/pgVector pour le stockage vectoriel des données, et integration d'Ollama pour les modèles de langage. Langchain a été utilisé pour orchestrer les flux de données entre les différents composants du système.",
+    methodology: "Développement d'une architecture microservices avec une API FastAPI connectée à un client React. Utilisation de LangChain pour l'orchestration des composants RAG. Implémentation de l'indexation vectorielle et chunking intelligent des documents. Intégration d'Ollama pour l'inférence locale des modèles de langage.",
     results: [
-      "Mémoire complet analysant les aspects théoriques et techniques du RAG",
-      "Application fonctionnelle démontrant l'utilisation pratique du RAG",
-      "Interface utilisateur claire permettant l'upload de documents et l'interrogation via langage naturel",
-      "Démonstration concrète des avantages du RAG pour l'amélioration de la pertinence des réponses des LLM"
+      "Application fonctionnelle permettant de discuter avec ses documents",
+      "Système capable d'extraire des informations précises des PDF",
+      "Interface intuitive et réactive pour l'upload et l'interrogation de documents",
+      "Gain significatif de temps dans la recherche d'informations"
     ],
     type: "university",
     date: "2024",
@@ -60,7 +55,7 @@ export const projects: Project[] = [
     id: 2,
     title: "RoomService - Gestion de l'occupation des salles",
     slug: "roomservice-gestion-salles",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Système de gestion et de visualisation en temps réel de l'occupation des salles de l'IUT de Blagnac, avec transmission des données via MQTT et déploiement containerisé.",
     longDescription: "Ce projet (SAE S3.A.01) visait à développer une solution complète de gestion des salles pour l'IUT. Il comprend un système de transmission de données en temps réel depuis des capteurs, une interface intuitive pour la visualisation de l'occupation, et une architecture robuste basée sur des containers pour faciliter le déploiement.",
     technologies: ["HTML", "CSS", "JavaScript", "PHP", "Python", "SQL", "MQTT", "Docker", "PhpMyAdmin"],
@@ -89,7 +84,7 @@ export const projects: Project[] = [
     id: 3,
     title: "Exploitation des bases de données - BeachAffairs",
     slug: "exploitation-bases-donnees-beachaffairs",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Projet d'analyse, rétro-conception et amélioration d'une base de données existante pour le système de gestion BeachAffairs, réalisé à l'IUT de Blagnac.",
     longDescription: "Ce projet (SAE S2.04) a consisté en l'exploration, la rétro-conception et l'amélioration d'une base de données existante pour le système BeachAffairs. Le travail a inclus l'analyse de la structure actuelle, l'identification des défauts, et l'implémentation d'améliorations basées sur de nouveaux besoins exprimés.",
     technologies: ["SQL", "SQL-LDD", "SQL-LMD", "SQL-LID", "Win'Design", "UML"],
@@ -121,7 +116,7 @@ export const projects: Project[] = [
     id: 4,
     title: "Site Web Portfolio",
     slug: "site-portfolio",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Développement de mon portfolio personnel utilisant les technologies modernes du web pour présenter mes compétences et réalisations de manière interactive.",
     longDescription: "Ce portfolio est conçu pour mettre en valeur mes compétences et projets de manière moderne et interactive. Il utilise les dernières technologies web pour offrir une expérience utilisateur optimale tout en respectant les meilleures pratiques de développement.",
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
@@ -148,7 +143,7 @@ export const projects: Project[] = [
     id: 5,
     title: "Amélioration RAG",
     slug: "amelioration-rag",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Projet d'amélioration des systèmes RAG (Retrieval-Augmented Generation) par l'intégration de techniques avancées de traitement du langage naturel.",
     longDescription: "Ce projet personnel étend mon travail académique sur les systèmes RAG en explorant des techniques avancées comme la reformulation de requêtes, la diversification des résultats et l'adaptation des modèles à des domaines spécifiques.",
     technologies: ["Python", "Django", "ChromaDB", "Langchain", "ollama", "API Rest", "React"],
@@ -174,7 +169,7 @@ export const projects: Project[] = [
     id: 6,
     title: "Anime Face Recognition",
     slug: "anime-face-recognition",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Système de reconnaissance de visages de personnages d'anime utilisant des techniques de deep learning pour identifier des personnages à partir d'images.",
     longDescription: "Ce projet utilise des techniques avancées de computer vision et de deep learning pour reconnaître des personnages d'anime à partir d'images. Il inclut un modèle entraîné sur une large base de données d'images de personnages d'anime populaires.",
     technologies: ["Python", "TensorFlow", "OpenCV", "Flask", "React"],
@@ -197,7 +192,7 @@ export const projects: Project[] = [
     id: 7,
     title: "Apprentissage outils IA",
     slug: "apprentissage-outils-ia",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Projet de formation et d'exploration des outils d'intelligence artificielle modernes, incluant des tutoriels et des cas d'usage pratiques.",
     longDescription: "Ce projet rassemble mes expériences et apprentissages dans le domaine de l'IA, notamment les modèles génératifs, les techniques d'apprentissage automatique et leur application pratique dans différents domaines.",
     technologies: ["Python", "Jupyter", "TensorFlow", "PyTorch", "Stable Diffusion"],
@@ -218,7 +213,7 @@ export const projects: Project[] = [
     id: 8,
     title: "Slave Narratives - Visualisation des récits d'esclaves",
     slug: "slave-narratives",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Amélioration du site web de visualisation des récits d'esclaves historiques pour l'Université Toulouse Jean Jaurès & Université Paul Sabatier, permettant de cartographier et retracer leurs parcours de vie.",
     longDescription: "Ce projet (SAE S5.A.01) visait à développer et améliorer une application web de visualisation des récits d'esclaves historiques. Le système permet de cartographier et visualiser les parcours de vie des esclaves (lieux de naissance, de mort, de publication) et offre de nouvelles fonctionnalités pour faciliter la recherche académique dans ce domaine.",
     technologies: ["PHP", "CodeIgniter", "MVC", "MariaDB", "HTML", "CSS", "JavaScript", "API Zotero", "PhpMyAdmin", "XAMPP"],
@@ -248,7 +243,7 @@ export const projects: Project[] = [
     id: 9,
     title: "Mise en place d'un environnement de développement",
     slug: "environnement-developpement-ubuntu",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Configuration complète d'une machine virtuelle Ubuntu pour le développement, avec installation de logiciels spécifiques et automatisation par scripts.",
     longDescription: "Ce projet (SAE S1.03) consistait à mettre en place et configurer un environnement de développement complet sur une machine virtuelle Ubuntu. L'objectif était de créer un système fonctionnel pouvant être utilisé par 200 utilisateurs, avec tous les outils de développement nécessaires et des scripts d'automatisation.",
     technologies: ["Ubuntu", "VirtualBox", "Bash", "Shell Script", "Java", "ProjectLibre", "Asciidoctor", "Terminator"],
@@ -263,14 +258,12 @@ export const projects: Project[] = [
       "Configurer les options de partage entre machine hôte et machine virtuelle",
       "Présenter la solution fonctionnelle lors d'une soutenance"
     ],
-    methodology: "Travail en équipe pour la configuration progressive de la machine virtuelle, développement de scripts Bash pour automatiser la création des utilisateurs et les tests, documentation des procédures d'installation et de configuration.",
+    methodology: "Installation et configuration d'Ubuntu 22.04, automatisation avec des scripts Bash pour la création d'utilisateurs et l'installation des logiciels, mise en place de paramètres de partage et de persistance, et tests rigoureux de validation.",
     results: [
-      "Machine virtuelle Ubuntu entièrement configurée et fonctionnelle",
-      "Installation réussie de l'ensemble des logiciels requis",
-      "Configuration de 200 utilisateurs avec droits appropriés",
-      "Scripts de test opérationnels validant la configuration",
-      "Documentation complète du processus d'installation et de configuration",
-      "Présentation réussie lors de la soutenance"
+      "Machine virtuelle fonctionnelle avec les logiciels requis",
+      "Système multi-utilisateurs opérationnel",
+      "Scripts d'automatisation pour la maintenance future",
+      "Documentation complète du processus d'installation et de configuration"
     ],
     type: "university",
     date: "2022",
@@ -280,7 +273,7 @@ export const projects: Project[] = [
     id: 10,
     title: "Suivi d'entraînements sportifs et coaching",
     slug: "suivi-entrainements-sportifs-coaching",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Développement d'une application web complète de gestion d'un club de sport orienté coaching, comprenant un back-office administratif, une API REST et une application front-end pour les sportifs.",
     longDescription: "Ce projet (SAE S6) consistait à concevoir et développer une solution complète pour un club de sport, permettant la gestion des coachs, des sportifs, des séances d'entraînement et des exercices. L'architecture inclut un back-office Symfony avec EasyAdmin pour les coachs et responsables, une API REST pour la communication entre les composants, et une application Angular pour les sportifs et internautes.",
     technologies: ["Symfony", "Angular", "EasyAdmin", "API REST", "JWT", "MySQL", "MVC", "TypeScript", "Bootstrap", "Git"],
@@ -313,7 +306,7 @@ export const projects: Project[] = [
     id: 11,
     title: "Automatisation CI/CD pour une application existante",
     slug: "automatisation-cicd",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Mise en place d'un processus complet d'intégration et déploiement continus (CI/CD) sur une application existante, utilisant GitLab CI pour l'automatisation du build, des tests et du déploiement.",
     longDescription: "Ce projet (R5.A.07) consistait à mettre en place un pipeline d'intégration continue et de déploiement continu pour une application existante. Le processus comprenait l'automatisation complète du cycle de développement, des tests à la production, avec des environnements distincts pour les tests et la production.",
     technologies: ["GitLab CI/CD", "Docker", "Tests Automatisés", "Déploiement Continu", "Git", "Shell Script", "YAML"],
@@ -343,7 +336,7 @@ export const projects: Project[] = [
     id: 12,
     title: "Analyse et optimisation d'algorithmes de pathfinding sur des données géographiques",
     slug: "optimisation-algorithmes-pathfinding",
-    image: imagePlaceholder,
+    image: "/Portfolio/images/placeholder-project.png",
     description: "Implémentation et optimisation d'algorithmes de calcul de chemin (Dijkstra et A*) sur des données OpenStreetMap, avec analyse des performances sur différentes tailles de territoires.",
     longDescription: "Ce projet (R5.A.04) consistait à analyser et optimiser des algorithmes de pathfinding appliqués à des données géographiques réelles. L'objectif était de comparer différentes approches pour calculer rapidement les distances et les chemins entre points dans des ensembles de données de taille croissante, depuis une petite région jusqu'à l'échelle nationale.",
     technologies: ["Python", "Pandas", "Polar", "Matplotlib", "Dijkstra", "A*", "OpenStreetMap", "Analyse de performance", "Optimisation algorithmique"],
