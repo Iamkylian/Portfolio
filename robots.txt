@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://Iamkylian.github.io/Portfolio
+
+# Sitemaps
+Sitemap: https://Iamkylian.github.io/Portfolio/sitemap.xml
