@@ -5,13 +5,23 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #3b82f6;
+  --secondary: #6366f1;
+  --accent: #2563eb;
+  --muted: #f1f5f9;
+  --border: #e2e8f0;
+  --card: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --primary: #60a5fa;
+  --secondary: #818cf8;
+  --accent: #3b82f6;
+  --muted: #1e293b;
+  --border: #334155;
+  --card: #1e293b;
 }
 
 body {
@@ -68,14 +78,11 @@ html {
   scrollbar-color: #bebcbc #f1f1f1;
 }
 
-
-
 /* NAVBAR - Header.tsx */
 
 .nav-link {
   position: relative;
   text-decoration: none;
-  color: #000; 
   font-size: 18px; 
   padding: 5px 0;
   font-weight: 600;
@@ -88,7 +95,7 @@ html {
   right: 0;
   bottom: -2px;
   height: 2px;
-  background-color: black; /* La couleur du trait */
+  background-color: var(--primary); /* La couleur du trait adapté au thème */
   transform: scaleX(0);
   transform-origin: top;
   transition: transform 0.3s ease;
@@ -99,16 +106,13 @@ html {
   transform-origin: top;
 }
 
-
 /* INTRO - Intro.tsx */
 
 .bg-section {
-  background-color: #212529;
+  background-color: var(--muted);
 }
 
-
 /* CONTACT - Contact.tsx */
-
 
 .icon-link {
   display: inline-flex;
@@ -117,7 +121,7 @@ html {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  color: #333;
+  color: var(--foreground);
   transition: all 0.3s ease;
   position: relative;
 }
@@ -135,10 +139,10 @@ html {
 }
 
 .icon-link:hover {
-  color: #0077b5; /* Couleur au survol, vous pouvez la changer */
+  color: var(--primary); /* Couleur au survol adaptée au thème */
 }
 
 .icon-link:hover::before {
-  border-color: #0077b5; /* Même couleur que celle du survol */
+  border-color: var(--primary); /* Adapté au thème */
   transform: scale(1.1);
 }

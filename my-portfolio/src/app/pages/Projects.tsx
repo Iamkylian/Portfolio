@@ -11,7 +11,7 @@ import { FaGithub, FaFilter, FaUniversity, FaLaptopCode, FaTimes, FaChevronRight
 const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ project, onClick }) => {
   return (
     <motion.div
-      className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer h-full flex flex-col"
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer h-full flex flex-col"
       whileHover={{ scale: 1.03, y: -5 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       onClick={onClick}
@@ -39,16 +39,16 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
         </div>
       </div>
       <div className="p-5 flex-grow">
-        <h3 className="text-xl font-bold mb-2 text-gray-800">{project.title}</h3>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description}</p>
+        <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-200">{project.title}</h3>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">{project.description}</p>
         <div className="flex flex-wrap gap-1 mb-3">
           {project.technologies.slice(0, 3).map((tech, index) => (
-            <span key={index} className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
+            <span key={index} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
               {tech}
             </span>
           ))}
           {project.technologies.length > 3 && (
-            <span className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
+            <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
               +{project.technologies.length - 3}
             </span>
           )}
@@ -60,7 +60,7 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
             <div key={skill} className="w-2 h-2 rounded-full bg-blue-500"></div>
           ))}
         </div>
-        <button className="text-blue-600 flex items-center text-sm font-medium hover:underline">
+        <button className="text-blue-600 dark:text-blue-400 flex items-center text-sm font-medium hover:underline">
           Voir plus <FaChevronRight className="ml-1" size={12} />
         </button>
       </div>
@@ -82,7 +82,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
       animate={{ scale: 1, opacity: 1, y: 0 }}
       exit={{ scale: 0.9, opacity: 0, y: 20 }}
       transition={{ type: "spring", damping: 25, stiffness: 500 }}
-      className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
       onClick={(e) => e.stopPropagation()}
     >
       <div className="relative h-64 md:h-80 w-full">
@@ -135,21 +135,21 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
 
       <div className="p-6 md:p-8">
         <div className="mb-8">
-          <h3 className="text-xl font-bold mb-3 text-gray-800">Description</h3>
-          <p className="text-gray-700 leading-relaxed">{project.longDescription || project.description}</p>
+          <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Description</h3>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.longDescription || project.description}</p>
         </div>
 
         {project.context && (
           <div className="mb-8">
-            <h3 className="text-xl font-bold mb-3 text-gray-800">Contexte</h3>
-            <p className="text-gray-700 leading-relaxed">{project.context}</p>
+            <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Contexte</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.context}</p>
           </div>
         )}
 
         {project.objectives && (
           <div className="mb-8">
-            <h3 className="text-xl font-bold mb-3 text-gray-800">Objectifs</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
+            <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Objectifs</h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
               {project.objectives.map((objective, index) => (
                 <li key={index} className="leading-relaxed">{objective}</li>
               ))}
@@ -159,15 +159,15 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
 
         {project.methodology && (
           <div className="mb-8">
-            <h3 className="text-xl font-bold mb-3 text-gray-800">Méthodologie</h3>
-            <p className="text-gray-700 leading-relaxed">{project.methodology}</p>
+            <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Méthodologie</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.methodology}</p>
           </div>
         )}
 
         {project.results && (
           <div className="mb-8">
-            <h3 className="text-xl font-bold mb-3 text-gray-800">Résultats</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
+            <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Résultats</h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
               {project.results.map((result, index) => (
                 <li key={index} className="leading-relaxed">{result}</li>
               ))}
@@ -176,10 +176,10 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
         )}
 
         <div className="mb-8">
-          <h3 className="text-xl font-bold mb-3 text-gray-800">Technologies</h3>
+          <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Technologies</h3>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech, index) => (
-              <span key={index} className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
+              <span key={index} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full text-sm">
                 {tech}
               </span>
             ))}
@@ -238,10 +238,10 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-white to-gray-50" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <section id="projects" className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">Mes Projets</h2>
-        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">Mes Projets</h2>
+        <p className="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mb-8">
           Découvrez les projets sur lesquels j'ai travaillé, tant dans le cadre universitaire que personnel
         </p>
         <div className="w-40 h-1 mx-auto mb-12 rounded-full transition-colors duration-300" style={{ backgroundColor: isHovered ? '#0077b5' : '#6b7280'}}></div>
@@ -254,7 +254,7 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
               className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
                 filters.includes('university') 
                   ? 'bg-green-600 text-white' 
-                  : 'bg-gray-200 text-gray-700'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
               }`}
             >
               <FaUniversity /> Universitaires
@@ -264,7 +264,7 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
               className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
                 filters.includes('personal') 
                   ? 'bg-purple-600 text-white' 
-                  : 'bg-gray-200 text-gray-700'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
               }`}
             >
               <FaLaptopCode /> Personnels
@@ -275,11 +275,11 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
               <input
                 type="text"
                 placeholder="Rechercher..."
-                className="px-4 py-2 pl-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-64"
+                className="px-4 py-2 pl-10 rounded-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-64"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <FaFilter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <FaFilter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300" />
             </div>
           </div>
         </div>
@@ -309,7 +309,7 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <p className="text-gray-500 text-lg">Aucun projet ne correspond à vos critères de recherche.</p>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">Aucun projet ne correspond à vos critères de recherche.</p>
               </motion.div>
             )}
           </AnimatePresence>

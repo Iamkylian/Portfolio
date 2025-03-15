@@ -4,11 +4,14 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaGithub, FaLinkedin, FaBars, FaTimes, FaDownload } from "react-icons/fa";
 import { motion } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "../contexts/ThemeContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("intro");
   const [scrollPosition, setScrollPosition] = useState(0);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +41,9 @@ const Header = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrollPosition > 50 ? "bg-white shadow-md py-2" : "bg-white/80 backdrop-blur-sm py-3.5"
+      scrollPosition > 50 
+        ? "bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800 py-2" 
+        : "bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm py-3.5"
     }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <motion.div 
@@ -52,8 +57,9 @@ const Header = () => {
           </Link>
         </motion.div>
         
-        <div className="md:hidden">
-          <button onClick={toggleMenu} className="focus:outline-none text-gray-600 hover:text-gray-800 transition-colors">
+        <div className="md:hidden flex items-center">
+          <ThemeToggle />
+          <button onClick={toggleMenu} className="ml-3 focus:outline-none text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors">
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
         </div>
@@ -61,7 +67,7 @@ const Header = () => {
         <motion.div
           className={`md:flex items-center md:space-x-8 ${
             isOpen
-              ? "flex flex-col absolute top-full left-0 right-0 bg-white shadow-md p-4 space-y-4"
+              ? "flex flex-col absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800 p-4 space-y-4"
               : "hidden"
           }`}
           initial={{ opacity: 0, y: -10 }}
@@ -96,7 +102,8 @@ const Header = () => {
             </motion.div>
           ))}
           
-          <div className="flex md:space-x-4 space-y-4 md:space-y-0 mt-4 md:mt-0 flex-col md:flex-row">
+          <div className="flex md:space-x-4 space-y-4 md:space-y-0 mt-4 md:mt-0 flex-col md:flex-row items-center">
+            <ThemeToggle />
             <a
               href="https://github.com/Iamkylian"
               target="_blank"

@@ -7,11 +7,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Page({ 
+export default async function Page({ 
   params 
 }: { 
   params: { slug: string } 
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   return <CompetencePage slug={slug} />;
 }

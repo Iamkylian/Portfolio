@@ -8,6 +8,7 @@ import Footer from "@/app/components/Footer";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 export function CompetencePage({ slug }: { slug: string }) {
   const router = useRouter();
@@ -16,15 +17,15 @@ export function CompetencePage({ slug }: { slug: string }) {
 
   if (!skill) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-white p-8 rounded-lg shadow-md text-center"
+          className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md text-center"
         >
-          <h1 className="text-2xl font-bold text-red-600 mb-4">Compétence non trouvée</h1>
-          <p className="text-gray-600 mb-6">La compétence que vous recherchez n'existe pas ou a été déplacée.</p>
+          <h1 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">Compétence non trouvée</h1>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">La compétence que vous recherchez n'existe pas ou a été déplacée.</p>
           <button
             onClick={() => router.push("/#skills")}
             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-2 mx-auto"
@@ -46,11 +47,11 @@ export function CompetencePage({ slug }: { slug: string }) {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen dark:bg-gray-900">
       <main className="flex-grow">
         {/* Section d'en-tête avec animation */}
         <motion.header 
-          className="relative w-full bg-gray-100"
+          className="relative w-full bg-gray-100 dark:bg-gray-800"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
@@ -90,7 +91,7 @@ export function CompetencePage({ slug }: { slug: string }) {
 
         {/* Section des niveaux avec affichage direct */}
         <section 
-          className="py-16 bg-white"
+          className="py-16 bg-white dark:bg-gray-800"
           onMouseEnter={() => setIsHovered(true)} 
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -102,10 +103,10 @@ export function CompetencePage({ slug }: { slug: string }) {
               animate="visible"
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl font-bold mb-4 text-gray-800 inline-flex items-center gap-3">
-                <FaGraduationCap className="text-blue-600" /> Niveaux de compétence
+              <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200 inline-flex items-center gap-3">
+                <FaGraduationCap className="text-blue-600 dark:text-blue-400" /> Niveaux de compétence
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                 Progression et maîtrise des différents niveaux de la compétence {skill.name}
               </p>
               <div 
@@ -120,12 +121,12 @@ export function CompetencePage({ slug }: { slug: string }) {
                 {skill.levels.map((level, index) => (
                   <motion.div
                     key={level.niveau}
-                    className="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-blue-600"
+                    className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden border-l-4 border-blue-600"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
                   >
-                    <div className="flex items-center bg-blue-50 p-4">
+                    <div className="flex items-center bg-blue-50 dark:bg-blue-900/30 p-4">
                       <div className="flex-shrink-0">
                         <div className={`flex items-center justify-center ${
                           skill.levels.length === 3 ? (
@@ -143,27 +144,27 @@ export function CompetencePage({ slug }: { slug: string }) {
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="font-bold text-xl text-gray-800">
+                        <h3 className="font-bold text-xl text-gray-800 dark:text-gray-200">
                           Niveau {level.niveau}
                         </h3>
                       </div>
                       <div className="ml-auto">
                         <FaTrophy className={`text-2xl ${
                           skill.levels.length === 3 ? (
-                            level.niveau === 1 ? 'text-amber-700' : 
-                            level.niveau === 2 ? 'text-gray-400' : 
-                            'text-yellow-400'
+                            level.niveau === 1 ? 'text-amber-700 dark:text-amber-600' : 
+                            level.niveau === 2 ? 'text-gray-400 dark:text-gray-300' : 
+                            'text-yellow-400 dark:text-yellow-300'
                           ) : 
                           skill.levels.length === 2 ? (
-                            level.niveau === 1 ? 'text-gray-400' :  
-                            'text-yellow-400'
+                            level.niveau === 1 ? 'text-gray-400 dark:text-gray-300' :  
+                            'text-yellow-400 dark:text-yellow-300'
                           ) : 
-                          'text-yellow-400'
+                          'text-yellow-400 dark:text-yellow-300'
                         }`} />
                       </div>
                     </div>
-                    <div className="p-5 bg-white">
-                      <p className="text-gray-700 text-lg">{level.description}</p>
+                    <div className="p-5 bg-white dark:bg-gray-700">
+                      <p className="text-gray-700 dark:text-gray-200 text-lg">{level.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -173,7 +174,7 @@ export function CompetencePage({ slug }: { slug: string }) {
         </section>
 
         {/* Section des projets associés */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-gray-50 dark:bg-gray-900">
           <div className="container mx-auto px-4 mb-12">
             <motion.div 
               className="text-center mb-12"
@@ -182,10 +183,10 @@ export function CompetencePage({ slug }: { slug: string }) {
               animate="visible"
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h2 className="text-3xl font-bold mb-4 text-gray-800 inline-flex items-center gap-3">
-                <FaProjectDiagram className="text-blue-600" /> Projets associés
+              <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200 inline-flex items-center gap-3">
+                <FaProjectDiagram className="text-blue-600 dark:text-blue-400" /> Projets associés
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                 Découvrez les projets sur lesquels j'ai appliqué cette compétence
               </p>
               <div className="w-32 h-1 mx-auto mt-6 rounded-full bg-blue-600"></div>

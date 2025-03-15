@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaCode, FaDatabase, FaPlane, FaGraduationCap, FaFileDownload } from "react-icons/fa";
+import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../contexts/ThemeContext";
 
 const jobLangages = [
   "Développeur Full Stack", // Français
@@ -55,6 +57,7 @@ const kanjiCharacters = [
 export default function Intro() {
   const [index, setIndex] = useState(0);
   const [kanjiPositions, setKanjiPositions] = useState<number[]>([]);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,7 +72,7 @@ export default function Intro() {
   return (
     <section
       id="intro"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden"
     >
       <div className="absolute inset-0 z-0 flex justify-center items-center opacity-20">
         <div className="absolute w-full h-full">
@@ -97,6 +100,13 @@ export default function Intro() {
         </div>
       </div>
 
+      {/* Bouton de thème */}
+      {/*
+      <div className="absolute top-24 right-6 z-20">
+        <ThemeToggle />
+      </div>
+      */}
+      
       <div className="container mx-auto px-6 z-10 py-16 md:py-24">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <motion.div 
@@ -117,7 +127,7 @@ export default function Intro() {
                 height={250}
                 priority={true}
                 draggable="false"
-                className="rounded-full border-4 border-white shadow-xl"
+                className="rounded-full border-4 border-white dark:border-gray-700 shadow-xl"
               />
               <motion.div 
                 className="absolute -bottom-3 -right-3 bg-blue-600 text-white p-3 rounded-full shadow-lg"
@@ -130,7 +140,7 @@ export default function Intro() {
             </motion.div>
 
             <motion.h1 
-              className="text-5xl md:text-6xl font-bold mb-4 text-gray-800 bg-gradient-to-r from-blue-700 to-gray-900 bg-clip-text text-transparent"
+              className="text-5xl md:text-6xl font-bold mb-4 text-gray-800 dark:text-gray-100 bg-gradient-to-r from-blue-700 to-gray-900 dark:from-blue-500 dark:to-gray-300 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -149,14 +159,14 @@ export default function Intro() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-2xl font-semibold mb-4 text-blue-600"
+                className="text-2xl font-semibold mb-4 text-blue-600 dark:text-blue-400"
               >
                 {jobLangages[index]}
               </motion.p>
             </motion.div>
 
             <motion.p 
-              className="text-lg text-gray-600 mb-8 leading-relaxed"
+              className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -179,7 +189,7 @@ export default function Intro() {
               </a>
               <a 
                 href="#contact"
-                className="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:translate-y-[-2px]"
+                className="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:translate-y-[-2px]"
               >
                 Me contacter
               </a>
@@ -187,44 +197,44 @@ export default function Intro() {
           </motion.div>
 
           <motion.div 
-            className="w-full md:w-1/2 rounded-xl overflow-hidden shadow-2xl bg-white p-8"
+            className="w-full md:w-1/2 rounded-xl overflow-hidden shadow-2xl bg-white dark:bg-gray-800 p-8"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-3 bg-blue-100 text-blue-600 rounded-full">
+                <div className="p-3 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full">
                   <FaPlane size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800">Data Analyst - Airbus</h3>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">Data Analyst - Airbus</h3>
               </div>
-              <p className="text-gray-600 ml-14">2023 - 2025 | Alternance</p>
-              <p className="text-gray-600 ml-14 mt-2">
+              <p className="text-gray-600 dark:text-gray-400 ml-14">2023 - 2025 | Alternance</p>
+              <p className="text-gray-600 dark:text-gray-400 ml-14 mt-2">
                 Conception d'un outil d'approbation d'offres commerciales et traitement ETL des données du DataHub pour fournir des indicateurs aux équipes business.
               </p>
             </div>
 
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-3 bg-blue-100 text-blue-600 rounded-full">
+                <div className="p-3 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full">
                   <FaGraduationCap size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800">BUT Informatique</h3>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">BUT Informatique</h3>
               </div>
-              <p className="text-gray-600 ml-14">2022 - 2025 | IUT de Blagnac</p>
-              <p className="text-gray-600 ml-14 mt-2">
+              <p className="text-gray-600 dark:text-gray-400 ml-14">2022 - 2025 | IUT de Blagnac</p>
+              <p className="text-gray-600 dark:text-gray-400 ml-14 mt-2">
                 Formation technique complète couvrant le développement d'applications, la gestion des données, l'analyse et optimisation, la conduite de projet, l'administration des systèmes et réseaux, et la gestion d'équipe informatique.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3 mt-8">
-              <div className="px-4 py-2 bg-gray-100 rounded-full text-gray-700 text-sm font-medium">Python</div>
-              <div className="px-4 py-2 bg-gray-100 rounded-full text-gray-700 text-sm font-medium">SQL</div>
-              <div className="px-4 py-2 bg-gray-100 rounded-full text-gray-700 text-sm font-medium">Data Science</div>
-              <div className="px-4 py-2 bg-gray-100 rounded-full text-gray-700 text-sm font-medium">Java</div>
-              <div className="px-4 py-2 bg-gray-100 rounded-full text-gray-700 text-sm font-medium">Angular</div>
-              <div className="px-4 py-2 bg-gray-100 rounded-full text-gray-700 text-sm font-medium">Recueil de besoin</div>
+              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Python</div>
+              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">SQL</div>
+              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Data Science</div>
+              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Java</div>
+              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Angular</div>
+              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Recueil de besoin</div>
             </div>
           </motion.div>
         </div>

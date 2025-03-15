@@ -117,10 +117,10 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">Me Contacter</h2>
-        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">Me Contacter</h2>
+        <p className="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mb-8">
           N'hésitez pas à me contacter pour discuter de projets, opportunités ou simplement pour échanger sur les technologies
         </p>
         <div className="w-40 h-1 mx-auto mb-12 rounded-full transition-colors duration-300" style={{ backgroundColor: isHovered ? '#0077b5' : '#6b7280'}}></div>
@@ -133,41 +133,41 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-white rounded-lg shadow-lg p-8 h-full">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800">Informations de contact</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 h-full">
+              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">Informations de contact</h3>
               
               <div className="space-y-6">
                 <div className="flex items-center">
-                  <div className="bg-blue-100 rounded-full p-3 mr-4">
-                    <FaEnvelope className="text-blue-600 text-xl" />
+                  <div className="bg-blue-100 dark:bg-blue-900 rounded-full p-3 mr-4">
+                    <FaEnvelope className="text-blue-600 dark:text-blue-300 text-xl" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-gray-600 uppercase mb-1">Email</h4>
-                    <a href="mailto:kyliangachet@gmail.com" className="text-gray-800 hover:text-blue-600 transition-colors">
-                      kyliangachet@gmail.com
+                    <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">Email</h4>
+                    <a href="mailto:contact@kylian-gachet.fr" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      contact@kylian-gachet.fr
                     </a>
                   </div>
                 </div>
                 
                 <div className="flex items-center">
-                  <div className="bg-blue-100 rounded-full p-3 mr-4">
-                    <FaPhone className="text-blue-600 text-xl" />
+                  <div className="bg-blue-100 dark:bg-blue-900 rounded-full p-3 mr-4">
+                    <FaPhone className="text-blue-600 dark:text-blue-300 text-xl" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-gray-600 uppercase mb-1">Téléphone</h4>
-                    <a href="tel:+33662610084" className="text-gray-800 hover:text-blue-600 transition-colors">
+                    <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">Téléphone</h4>
+                    <a href="tel:+33662610084" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                       +33 6 62 61 00 84
                     </a>
                   </div>
                 </div>
                 
                 <div className="flex items-center">
-                  <div className="bg-blue-100 rounded-full p-3 mr-4">
-                    <FaMapMarkerAlt className="text-blue-600 text-xl" />
+                  <div className="bg-blue-100 dark:bg-blue-900 rounded-full p-3 mr-4">
+                    <FaMapMarkerAlt className="text-blue-600 dark:text-blue-300 text-xl" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-gray-600 uppercase mb-1">Localisation</h4>
-                    <p className="text-gray-800">
+                    <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">Localisation</h4>
+                    <p className="text-gray-800 dark:text-gray-200">
                       Toulouse, France
                     </p>
                   </div>
@@ -175,13 +175,13 @@ const Contact = () => {
               </div>
               
               <div className="mt-10">
-                <h4 className="text-xl font-bold mb-4 text-gray-800">Me suivre</h4>
+                <h4 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">Me suivre</h4>
                 <div className="flex space-x-4">
                   <a 
                     href="https://linkedin.com/in/kylian-gachet" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="bg-blue-100 hover:bg-blue-600 text-blue-600 hover:text-white p-3 rounded-full transition-all duration-300"
+                    className="bg-blue-100 dark:bg-blue-900 hover:bg-blue-600 text-blue-600 dark:text-blue-300 hover:text-white p-3 rounded-full transition-all duration-300"
                   >
                     <FaLinkedin className="text-xl" />
                   </a>
@@ -189,7 +189,7 @@ const Contact = () => {
                     href="https://github.com/Iamkylian" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="bg-blue-100 hover:bg-blue-600 text-blue-600 hover:text-white p-3 rounded-full transition-all duration-300"
+                    className="bg-blue-100 dark:bg-blue-900 hover:bg-blue-600 text-blue-600 dark:text-blue-300 hover:text-white p-3 rounded-full transition-all duration-300"
                   >
                     <FaGithub className="text-xl" />
                   </a>
@@ -205,8 +205,8 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800">Envoyez-moi un message</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">Envoyez-moi un message</h3>
               
               {submitted ? (
                 <motion.div 
@@ -224,27 +224,27 @@ const Contact = () => {
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Nom *</label>
+                      <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Nom *</label>
                       <input
                         type="text"
                         id="name"
                         name="from_name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 font-medium ${errors.name ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'}`}
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 dark:text-gray-200 font-medium dark:bg-gray-700 dark:border-gray-600 ${errors.name ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200 dark:focus:ring-blue-800'}`}
                         placeholder="Votre nom"
                       />
                       {errors.name && <p className="mt-1 text-red-500 text-sm">{errors.name}</p>}
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email *</label>
+                      <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email *</label>
                       <input
                         type="email"
                         id="email"
                         name="from_email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 font-medium ${errors.email ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'}`}
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 dark:text-gray-200 font-medium dark:bg-gray-700 dark:border-gray-600 ${errors.email ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200 dark:focus:ring-blue-800'}`}
                         placeholder="Votre email"
                       />
                       {errors.email && <p className="mt-1 text-red-500 text-sm">{errors.email}</p>}
@@ -252,13 +252,13 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">Sujet *</label>
+                    <label htmlFor="subject" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Sujet *</label>
                     <select
                       id="subject"
                       name="subject" 
                       value={formData.subject}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 font-medium ${errors.subject ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'}`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 dark:text-gray-200 font-medium dark:bg-gray-700 dark:border-gray-600 ${errors.subject ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200 dark:focus:ring-blue-800'}`}
                     >
                       <option value="">Sélectionnez un sujet</option>
                       <option value="Projet">Proposition de projet</option>
@@ -271,14 +271,14 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message *</label>
+                    <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message *</label>
                     <textarea
                       id="message"
                       name="message" 
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 font-medium ${errors.message ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'}`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 dark:text-gray-200 font-medium dark:bg-gray-700 dark:border-gray-600 ${errors.message ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200 dark:focus:ring-blue-800'}`}
                       placeholder="Votre message"
                     ></textarea>
                     {errors.message && <p className="mt-1 text-red-500 text-sm">{errors.message}</p>}

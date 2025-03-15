@@ -60,7 +60,7 @@ const Footer = () => {
                 <FaGithub size={18} />
               </a>
               <a 
-                href="mailto:kyliangachet@gmail.com"
+                href="mailto:contact@kylian-gachet.fr"
                 className="bg-gray-700 hover:bg-blue-600 p-3 rounded-full transition-colors duration-300"
               >
                 <FaEnvelope size={18} />
@@ -118,8 +118,8 @@ const Footer = () => {
             <address className="not-italic space-y-2 text-gray-300">
               <p className="flex items-center">
                 <span className="font-medium">Email:</span>
-                <a href="mailto:kyliangachet@gmail.com" className="ml-2 hover:text-white transition-colors duration-300">
-                  kyliangachet@gmail.com
+                <a href="mailto:contact@kylian-gachet.fr" className="ml-2 hover:text-white transition-colors duration-300">
+                  contact@kylian-gachet.fr
                 </a>
               </p>
               <p className="flex items-center">
