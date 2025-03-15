@@ -1,13 +1,11 @@
 import Footer from "./../components/Footer";
 import Header from "./../components/Header";
 import React from "react";
-//import CV from "./CV";
 import Intro from "./Hero";
 import Portfolio from "./Projects";
-import Contact from "./Contact";
+import Contact from "./../components/Contact";
 import Education from "./Education";
 import Skills from "./Skills";
-import Certifications from "./Certifications";
 
 const Home = () => {
 
@@ -16,8 +14,6 @@ const Home = () => {
       <Header />
       <Intro />
       <Education />
-      {/* <Certifications/> */}
-      {/* <CV /> */}
       <Skills />
       <Portfolio />
       <Contact />

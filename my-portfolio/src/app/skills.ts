@@ -58,3 +58,57 @@ export const skills = [
     ]
   },
 ];
+
+// Compétences techniques
+export const technicalSkills = {
+  development: [
+    { name: "Python", level: 90, icon: "python" },
+    { name: "Java", level: 85, icon: "java" },
+    { name: "C", level: 75, icon: "c" },
+    { name: "C#", level: 65, icon: "csharp" },
+    { name: "PHP", level: 70, icon: "php" }
+  ],
+  web: [
+    { name: "HTML5", level: 95, icon: "html5" },
+    { name: "CSS3", level: 90, icon: "css3" },
+    { name: "JavaScript", level: 85, icon: "javascript" },
+    { name: "React", level: 80, icon: "react" },
+    { name: "TypeScript", level: 75, icon: "typescript" },
+    { name: "Angular", level: 60, icon: "angular" },
+    { name: "Symfony", level: 65, icon: "symfony" },
+    { name: "Vue.js", level: 70, icon: "vuejs" },
+    { name: "Tailwind", level: 85, icon: "tailwind" },
+    { name: "Bootstrap", level: 90, icon: "bootstrap" }
+  ],
+  data: [
+    { name: "SQL", level: 85, icon: "database" },
+    { name: "Python (Data)", level: 90, icon: "python" },
+    { name: "Spark", level: 75, icon: "spark" },
+    { name: "Jupyterhub", level: 85, icon: "jupyter" },
+    { name: "ETL", level: 80, icon: "etl" }
+  ],
+  tools: [
+    { name: "Docker", level: 80, icon: "docker" },
+    { name: "Git", level: 85, icon: "git" },
+    { name: "Linux", level: 75, icon: "linux" },
+    { name: "VS Code", level: 90, icon: "vscode" },
+    { name: "GitHub", level: 85, icon: "github" }
+  ]
+};
+
+// Soft skills
+export const softSkills = [
+  { name: "Travail d'équipe", level: 90 },
+  { name: "Communication", level: 85 },
+  { name: "Résolution de problèmes", level: 90 },
+  { name: "Gestion du temps", level: 80 },
+  { name: "Adaptabilité", level: 85 },
+  { name: "Autonomie", level: 90 }
+];
+
+// Compétences linguistiques
+export const languageSkills = [
+  { name: "Français", level: 100, icon: "fr" },
+  { name: "Anglais", level: 65, icon: "en" },
+  { name: "Allemand", level: 25, icon: "de" }
+];

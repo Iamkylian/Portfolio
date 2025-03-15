@@ -1,9 +1,10 @@
-# *
+# robots.txt pour le portfolio de Kylian Gachet
 User-agent: *
 Allow: /
 
-# Host
-Host: https://Iamkylian.github.io/Portfolio
+# Sitemap
+Sitemap: https://kyliangachet.fr/sitemap.xml
 
-# Sitemaps
-Sitemap: https://Iamkylian.github.io/Portfolio/sitemap.xml
+# Répertoires à ne pas indexer
+Disallow: /api/
+Disallow: /_next/
