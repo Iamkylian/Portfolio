@@ -7,10 +7,10 @@ import { motion } from "framer-motion";
 import { FaCode, FaDatabase, FaPlane, FaGraduationCap, FaFileDownload } from "react-icons/fa";
 import ThemeToggle from "../components/ThemeToggle";
 import { useTheme } from "../contexts/ThemeContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const jobLangages = [
   "Développeur Full Stack", // Français
-  "Data Analyst", // Français
   "Full Stack Developer", // Anglais
   "フルスタック開発者", // Japonais
   "Full-Stack-Entwickler", // Allemand
@@ -58,6 +58,7 @@ export default function Intro() {
   const [index, setIndex] = useState(0);
   const [kanjiPositions, setKanjiPositions] = useState<number[]>([]);
   const { theme } = useTheme();
+  const { language, messages } = useLanguage();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -171,7 +172,10 @@ export default function Intro() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
             >
-              Passionné par le développement et la cybersécurité, je suis actuellement <span className="font-semibold">Data Analyst en alternance chez Airbus</span>. En parallèle, j'étudie l'informatique à l'IUT de Blagnac en <span className="font-semibold">BUT Informatique</span>, où je développe mes compétences techniques et ma vision globale des projets.
+              {language === 'fr' ? 
+                "Passionné par le développement et la cybersécurité, je suis actuellement Data Analyst en alternance chez Airbus. En parallèle, j'étudie l'informatique à l'IUT de Blagnac en BUT Informatique, où je développe mes compétences techniques et ma vision globale des projets." :
+                "Passionate about development and cybersecurity, I'm currently a Data Analyst apprentice at Airbus. Alongside, I study computer science at IUT Blagnac in a Bachelor's program, where I develop my technical skills and global vision of projects."
+              }
             </motion.p>
 
             <motion.div 
@@ -185,13 +189,13 @@ export default function Intro() {
                 download
                 className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:translate-y-[-2px]"
               >
-                <FaFileDownload /> Télécharger mon CV
+                <FaFileDownload /> {messages?.common?.downloadCv || "Télécharger mon CV"}
               </a>
               <a 
                 href="#contact"
                 className="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:translate-y-[-2px]"
               >
-                Me contacter
+                {messages?.common?.contactMe || "Me contacter"}
               </a>
             </motion.div>
           </motion.div>
@@ -207,11 +211,17 @@ export default function Intro() {
                 <div className="p-3 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full">
                   <FaPlane size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">Data Analyst - Airbus</h3>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">
+                  {language === 'fr' ? "Data Analyst - Airbus" : "Data Analyst - Airbus"}
+                </h3>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 ml-14">2023 - 2025 | Alternance</p>
+              <p className="text-gray-600 dark:text-gray-400 ml-14">
+                {language === 'fr' ? "2023 - 2025 | Alternance" : "2023 - 2025 | Apprenticeship"}
+              </p>
               <p className="text-gray-600 dark:text-gray-400 ml-14 mt-2">
-                Conception d'un outil d'approbation d'offres commerciales et traitement ETL des données du DataHub pour fournir des indicateurs aux équipes business.
+                {language === 'fr' 
+                  ? "Conception d'un outil d'approbation d'offres commerciales et traitement ETL des données du DataHub pour fournir des indicateurs aux équipes business."
+                  : "Design of a commercial offer approval tool and ETL processing of DataHub data to provide indicators to business teams."}
               </p>
             </div>
 
@@ -220,21 +230,31 @@ export default function Intro() {
                 <div className="p-3 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full">
                   <FaGraduationCap size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">BUT Informatique</h3>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">
+                  {language === 'fr' ? "BUT Informatique" : "Computer Science Bachelor"}
+                </h3>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 ml-14">2022 - 2025 | IUT de Blagnac</p>
+              <p className="text-gray-600 dark:text-gray-400 ml-14">
+                {language === 'fr' ? "2022 - 2025 | IUT de Blagnac" : "2022 - 2025 | IUT Blagnac"}
+              </p>
               <p className="text-gray-600 dark:text-gray-400 ml-14 mt-2">
-                Formation technique complète couvrant le développement d'applications, la gestion des données, l'analyse et optimisation, la conduite de projet, l'administration des systèmes et réseaux, et la gestion d'équipe informatique.
+                {language === 'fr' 
+                  ? "Formation technique complète couvrant le développement d'applications, la gestion des données, l'analyse et optimisation, la conduite de projet, l'administration des systèmes et réseaux, et la gestion d'équipe informatique."
+                  : "Comprehensive technical training covering application development, data management, analysis and optimization, project management, system and network administration, and IT team management."}
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3 mt-8">
               <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Python</div>
               <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">SQL</div>
-              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Data Science</div>
+              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">
+                {language === 'fr' ? "Data Science" : "Data Science"}
+              </div>
               <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Java</div>
               <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Angular</div>
-              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">Recueil de besoin</div>
+              <div className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 text-sm font-medium">
+                {language === 'fr' ? "Recueil de besoin" : "Requirements Gathering"}
+              </div>
             </div>
           </motion.div>
         </div>

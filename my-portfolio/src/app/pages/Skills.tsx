@@ -13,11 +13,13 @@ import { RiDatabase2Fill } from "react-icons/ri";
 import { GrDatabase } from "react-icons/gr";
 import { VscCode } from "react-icons/vsc";
 import Image from "next/image";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Skills() {
   const [isHovered, setIsHovered] = useState(false);
   const [activeTab, setActiveTab] = useState("BUT");
   const [expandedCategories, setExpandedCategories] = useState<string[]>(["development", "web", "data", "tools"]);
+  const { language, messages } = useLanguage();
 
   const toggleCategory = (category: string) => {
     if (expandedCategories.includes(category)) {
@@ -60,12 +62,36 @@ export default function Skills() {
     }
   };
 
+  // Textes traduits
+  const texts = {
+    development: language === 'fr' ? 'Développement' : 'Development',
+    web: language === 'fr' ? 'Développement Web' : 'Web Development',
+    data: 'Data',
+    tools: language === 'fr' ? 'Outils & DevOps' : 'Tools & DevOps',
+    languageLevels: {
+      beginner: language === 'fr' ? 'Débutant' : 'Beginner',
+      intermediate: language === 'fr' ? 'Intermédiaire' : 'Intermediate',
+      expert: language === 'fr' ? 'Expert' : 'Expert',
+      native: language === 'fr' ? 'C2 - Maîtrise / Langue maternelle' : 'C2 - Mastery / Native',
+      advanced: language === 'fr' ? 'C1 - Avancé' : 'C1 - Advanced',
+      upperIntermediate: language === 'fr' ? 'B2 - Intermédiaire supérieur' : 'B2 - Upper Intermediate',
+      intermediate: language === 'fr' ? 'B1 - Intermédiaire' : 'B1 - Intermediate',
+      elementary: language === 'fr' ? 'A2 - Élémentaire' : 'A2 - Elementary',
+      beginner: language === 'fr' ? 'A1 - Débutant' : 'A1 - Beginner'
+    }
+  };
+
   return (
     <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-900" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-4 text-center text-gray-700 dark:text-gray-200">Mes Compétences</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center text-gray-700 dark:text-gray-200">
+          {messages?.skills?.title || "Mes Compétences"}
+        </h2>
         <p className="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mb-8">
-          Découvrez l'ensemble de mes compétences techniques et non techniques acquises durant ma formation et mes expériences professionnelles
+          {language === 'fr' 
+            ? "Découvrez l'ensemble de mes compétences techniques et non techniques acquises durant ma formation et mes expériences professionnelles"
+            : "Discover all the technical and non-technical skills I've acquired during my education and professional experiences"
+          }
         </p>
         <div className="w-40 h-1 mx-auto mb-12 rounded-full transition-colors duration-300" style={{ backgroundColor: isHovered ? '#0077b5' : '#6b7280'}}></div>
         
@@ -77,7 +103,7 @@ export default function Skills() {
               activeTab === "BUT" ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
             }`}
           >
-            <FaGraduationCap /> Compétences BUT
+            <FaGraduationCap /> {language === 'fr' ? "Compétences BUT" : "BUT Skills"}
           </button>
           <button 
             onClick={() => setActiveTab("technical")}
@@ -85,7 +111,7 @@ export default function Skills() {
               activeTab === "technical" ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
             }`}
           >
-            <FaLaptopCode /> Compétences Techniques
+            <FaLaptopCode /> {language === 'fr' ? "Compétences techniques" : "Technical Skills"}
           </button>
           <button 
             onClick={() => setActiveTab("soft")}
@@ -93,7 +119,7 @@ export default function Skills() {
               activeTab === "soft" ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
             }`}
           >
-            <FaUserTie /> Soft Skills
+            <FaUserTie /> {language === 'fr' ? "Soft Skills" : "Soft Skills"}
           </button>
           <button 
             onClick={() => setActiveTab("language")}
@@ -101,7 +127,7 @@ export default function Skills() {
               activeTab === "language" ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
             }`}
           >
-            <FaGlobe /> Langues
+            <FaGlobe /> {language === 'fr' ? "Langues" : "Languages"}
           </button>
         </div>
 
@@ -126,23 +152,25 @@ export default function Skills() {
                       <div className="relative h-32 overflow-hidden">
                         <Image
                           src={`/Portfolio/images/skills/${skill.slug}.jpg`}
-                          alt={skill.name}
+                          alt={language === 'fr' ? skill.name : (skill.nameEn || skill.name)}
                           fill
                           style={{ objectFit: 'cover' }}
                           className="transition-transform duration-500 hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40 flex items-center justify-center">
-                          <h3 className="text-xl font-bold text-white px-4 text-center">{skill.name}</h3>
+                          <h3 className="text-xl font-bold text-white px-4 text-center">
+                            {language === 'fr' ? skill.name : (skill.nameEn || skill.name)}
+                          </h3>
                         </div>
                       </div>
                       <div className="p-6">
                         <ul className="space-y-3">
                           {skill.levels.map((level) => (
-                            <li key={level.niveau} className="flex gap-2">
-                              <span className="flex items-center justify-center bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 w-6 h-6 rounded-full text-sm font-bold flex-shrink-0">
-                                {level.niveau}
+                            <li key={level.niveau} className="flex items-start">
+                              <span className="inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 w-6 h-6 shrink-0 mr-3 font-semibold text-sm">{level.niveau}</span>
+                              <span className="text-gray-600 dark:text-gray-300 text-sm">
+                                {language === 'fr' ? level.description : (level.descriptionEn || level.description)}
                               </span>
-                              <span className="text-gray-700 dark:text-gray-300 text-sm">{level.description}</span>
                             </li>
                           ))}
                         </ul>
@@ -174,7 +202,7 @@ export default function Skills() {
                   onClick={() => toggleCategory("development")}
                 >
                   <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center">
-                    <FaLaptopCode className="mr-2 text-blue-600 dark:text-blue-400" /> Développement
+                    <FaLaptopCode className="mr-2 text-blue-600 dark:text-blue-400" /> {texts.development}
                   </h3>
                   {expandedCategories.includes("development") ? <FaChevronUp className="dark:text-gray-300" /> : <FaChevronDown className="dark:text-gray-300" />}
                 </div>
@@ -194,7 +222,9 @@ export default function Skills() {
                             <div className="mr-3 text-blue-600 dark:text-blue-400">
                               {getIcon(skill.icon)}
                             </div>
-                            <h4 className="font-medium text-gray-800 dark:text-gray-200">{skill.name}</h4>
+                            <h4 className="font-medium text-gray-800 dark:text-gray-200">
+                              {language === 'fr' ? skill.name : (skill.nameEn || skill.name)}
+                            </h4>
                           </div>
                         </motion.div>
                       ))}
@@ -210,7 +240,7 @@ export default function Skills() {
                   onClick={() => toggleCategory("web")}
                 >
                   <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center">
-                    <SiHtml5 className="mr-2 text-orange-500" /> Développement Web
+                    <SiHtml5 className="mr-2 text-orange-500" /> {texts.web}
                   </h3>
                   {expandedCategories.includes("web") ? <FaChevronUp className="dark:text-gray-300" /> : <FaChevronDown className="dark:text-gray-300" />}
                 </div>
@@ -230,7 +260,9 @@ export default function Skills() {
                             <div className="mr-3 text-blue-600 dark:text-blue-400">
                               {getIcon(skill.icon)}
                             </div>
-                            <h4 className="font-medium text-gray-800 dark:text-gray-200">{skill.name}</h4>
+                            <h4 className="font-medium text-gray-800 dark:text-gray-200">
+                              {language === 'fr' ? skill.name : (skill.nameEn || skill.name)}
+                            </h4>
                           </div>
                         </motion.div>
                       ))}
@@ -246,7 +278,7 @@ export default function Skills() {
                   onClick={() => toggleCategory("data")}
                 >
                   <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center">
-                    <RiDatabase2Fill className="mr-2 text-purple-600 dark:text-purple-400" /> Data
+                    <RiDatabase2Fill className="mr-2 text-purple-600 dark:text-purple-400" /> {texts.data}
                   </h3>
                   {expandedCategories.includes("data") ? <FaChevronUp className="dark:text-gray-300" /> : <FaChevronDown className="dark:text-gray-300" />}
                 </div>
@@ -266,7 +298,9 @@ export default function Skills() {
                             <div className="mr-3 text-purple-600 dark:text-purple-400">
                               {getIcon(skill.icon)}
                             </div>
-                            <h4 className="font-medium text-gray-800 dark:text-gray-200">{skill.name}</h4>
+                            <h4 className="font-medium text-gray-800 dark:text-gray-200">
+                              {language === 'fr' ? skill.name : (skill.nameEn || skill.name)}
+                            </h4>
                           </div>
                         </motion.div>
                       ))}
@@ -282,7 +316,7 @@ export default function Skills() {
                   onClick={() => toggleCategory("tools")}
                 >
                   <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center">
-                    <FaLaptopCode className="mr-2 text-gray-700 dark:text-gray-400" /> Outils & DevOps
+                    <FaLaptopCode className="mr-2 text-gray-700 dark:text-gray-400" /> {texts.tools}
                   </h3>
                   {expandedCategories.includes("tools") ? <FaChevronUp className="dark:text-gray-300" /> : <FaChevronDown className="dark:text-gray-300" />}
                 </div>
@@ -302,7 +336,9 @@ export default function Skills() {
                             <div className="mr-3 text-gray-700 dark:text-gray-300">
                               {getIcon(skill.icon)}
                             </div>
-                            <h4 className="font-medium text-gray-800 dark:text-gray-200">{skill.name}</h4>
+                            <h4 className="font-medium text-gray-800 dark:text-gray-200">
+                              {language === 'fr' ? skill.name : (skill.nameEn || skill.name)}
+                            </h4>
                           </div>
                         </motion.div>
                       ))}
@@ -330,7 +366,9 @@ export default function Skills() {
                       animate={{ opacity: 1 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3">{skill.name}</h4>
+                      <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3">
+                        {language === 'fr' ? skill.name : (skill.nameEn || skill.name)}
+                      </h4>
                       <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3 mb-2">
                         <motion.div 
                           className="bg-yellow-500 h-3 rounded-full" 
@@ -340,9 +378,9 @@ export default function Skills() {
                         ></motion.div>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
-                        <span>Débutant</span>
-                        <span>Intermédiaire</span>
-                        <span>Expert</span>
+                        <span>{texts.languageLevels.beginner}</span>
+                        <span>{texts.languageLevels.intermediate}</span>
+                        <span>{texts.languageLevels.expert}</span>
                       </div>
                     </motion.div>
                   ))}
@@ -373,14 +411,14 @@ export default function Skills() {
                           <span className="mr-2 w-8 h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-full">
                             {getIcon(skill.icon)}
                           </span>
-                          {skill.name}
+                          {language === 'fr' ? skill.name : (skill.nameEn || skill.name)}
                         </h4>
                         <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                          {skill.level >= 90 ? 'C2 - Maîtrise / Langue maternelle' :
-                           skill.level >= 75 ? 'C1 - Avancé' :
-                           skill.level >= 60 ? 'B2 - Intermédiaire supérieur' :
-                           skill.level >= 40 ? 'B1 - Intermédiaire' :
-                           skill.level >= 20 ? 'A2 - Élémentaire' : 'A1 - Débutant'}
+                          {skill.level >= 90 ? texts.languageLevels.native :
+                           skill.level >= 75 ? texts.languageLevels.advanced :
+                           skill.level >= 60 ? texts.languageLevels.upperIntermediate :
+                           skill.level >= 40 ? texts.languageLevels.intermediate :
+                           skill.level >= 20 ? texts.languageLevels.elementary : texts.languageLevels.beginner}
                         </span>
                       </div>
                       <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3 mb-4">

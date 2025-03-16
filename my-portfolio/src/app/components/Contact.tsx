@@ -4,8 +4,25 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaLinkedin, FaGithub } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
+import { useLanguage } from '../contexts/LanguageContext';
+
+// Types pour la validation du formulaire
+type FormData = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+type FormErrors = {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+};
 
 const Contact = () => {
+  const { language, messages } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -45,37 +62,37 @@ const Contact = () => {
     }
   };
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
+  const validate = (values: FormData) => {
+    const errors: FormErrors = {};
     
-    if (!formData.name.trim()) {
-      newErrors.name = 'Le nom est requis';
+    if (!values.name) {
+      errors.name = messages.contact.required;
     }
     
-    if (!formData.email.trim()) {
-      newErrors.email = 'L\'email est requis';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
-      newErrors.email = 'Format d\'email invalide';
+    if (!values.email) {
+      errors.email = messages.contact.required;
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      errors.email = messages.contact.validEmail;
     }
     
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Le sujet est requis';
+    if (!values.subject) {
+      errors.subject = messages.contact.required;
     }
     
-    if (!formData.message.trim()) {
-      newErrors.message = 'Le message est requis';
-    } else if (formData.message.trim().length < 3) {
-      newErrors.message = 'Le message doit comporter au moins 3 caractères';
+    if (!values.message) {
+      errors.message = messages.contact.required;
     }
     
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return errors;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (validateForm() && formRef.current) {
+    const formErrors = validate(formData);
+    setErrors(formErrors);
+    
+    if (Object.keys(formErrors).length === 0 && formRef.current) {
       setIsSubmitting(true);
       
       // Préparation des données pour EmailJS si nécessaire
@@ -119,9 +136,11 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">Me Contacter</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">
+          {messages.contact.title}
+        </h2>
         <p className="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mb-8">
-          N'hésitez pas à me contacter pour discuter de projets, opportunités ou simplement pour échanger sur les technologies
+          {messages.contact.subtitle}
         </p>
         <div className="w-40 h-1 mx-auto mb-12 rounded-full transition-colors duration-300" style={{ backgroundColor: isHovered ? '#0077b5' : '#6b7280'}}></div>
         
@@ -134,7 +153,9 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 h-full">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">Informations de contact</h3>
+              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">
+                {language === 'fr' ? "Informations de contact" : "Contact Information"}
+              </h3>
               
               <div className="space-y-6">
                 <div className="flex items-center">
@@ -143,8 +164,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">Email</h4>
-                    <a href="mailto:contact@kylian-gachet.fr" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                      contact@kylian-gachet.fr
+                    <a href="mailto:kyliangachet@gmail.com" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      kyliangachet@gmail.com
                     </a>
                   </div>
                 </div>
@@ -154,7 +175,9 @@ const Contact = () => {
                     <FaPhone className="text-blue-600 dark:text-blue-300 text-xl" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">Téléphone</h4>
+                    <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">
+                      {language === 'fr' ? "Téléphone" : "Phone"}
+                    </h4>
                     <a href="tel:+33662610084" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                       +33 6 62 61 00 84
                     </a>
@@ -166,7 +189,9 @@ const Contact = () => {
                     <FaMapMarkerAlt className="text-blue-600 dark:text-blue-300 text-xl" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">Localisation</h4>
+                    <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">
+                      {language === 'fr' ? "Localisation" : "Location"}
+                    </h4>
                     <p className="text-gray-800 dark:text-gray-200">
                       Toulouse, France
                     </p>
@@ -175,10 +200,12 @@ const Contact = () => {
               </div>
               
               <div className="mt-10">
-                <h4 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">Me suivre</h4>
+                <h4 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
+                  {language === 'fr' ? "Me suivre" : "Follow me"}
+                </h4>
                 <div className="flex space-x-4">
                   <a 
-                    href="https://linkedin.com/in/kylian-gachet" 
+                    href="https://linkedin.com/in/kyliangachet" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-blue-100 dark:bg-blue-900 hover:bg-blue-600 text-blue-600 dark:text-blue-300 hover:text-white p-3 rounded-full transition-all duration-300"
@@ -206,7 +233,9 @@ const Contact = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">Envoyez-moi un message</h3>
+              <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">
+                {language === 'fr' ? "Envoyez-moi un message" : "Send me a message"}
+              </h3>
               
               {submitted ? (
                 <motion.div 
@@ -217,69 +246,77 @@ const Contact = () => {
                   <svg className="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <h4 className="text-xl font-bold mb-2">Message envoyé avec succès !</h4>
-                  <p>Merci pour votre message. Je vous répondrai dans les plus brefs délais.</p>
+                  <h4 className="text-xl font-bold mb-2">{messages.contact.success}</h4>
+                  <p>{language === 'fr' ? "Merci pour votre message. Je vous répondrai dans les plus brefs délais." : "Thank you for your message. I will respond as soon as possible."}</p>
                 </motion.div>
               ) : (
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Nom *</label>
+                      <label htmlFor="from_name" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                        {messages.contact.name} *
+                      </label>
                       <input
                         type="text"
-                        id="name"
+                        id="from_name"
                         name="from_name"
                         value={formData.name}
                         onChange={handleChange}
                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 dark:text-gray-200 font-medium dark:bg-gray-700 dark:border-gray-600 ${errors.name ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200 dark:focus:ring-blue-800'}`}
-                        placeholder="Votre nom"
+                        placeholder={language === 'fr' ? "Votre nom" : "Your name"}
                       />
                       {errors.name && <p className="mt-1 text-red-500 text-sm">{errors.name}</p>}
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email *</label>
+                      <label htmlFor="from_email" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                        {messages.contact.email} *
+                      </label>
                       <input
                         type="email"
-                        id="email"
+                        id="from_email"
                         name="from_email"
                         value={formData.email}
                         onChange={handleChange}
                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 dark:text-gray-200 font-medium dark:bg-gray-700 dark:border-gray-600 ${errors.email ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200 dark:focus:ring-blue-800'}`}
-                        placeholder="Votre email"
+                        placeholder={language === 'fr' ? "Votre email" : "Your email"}
                       />
                       {errors.email && <p className="mt-1 text-red-500 text-sm">{errors.email}</p>}
                     </div>
                   </div>
                   
                   <div>
-                    <label htmlFor="subject" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Sujet *</label>
+                    <label htmlFor="subject" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                      {language === 'fr' ? "Sujet" : "Subject"} *
+                    </label>
                     <select
                       id="subject"
-                      name="subject" 
+                      name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 dark:text-gray-200 font-medium dark:bg-gray-700 dark:border-gray-600 ${errors.subject ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200 dark:focus:ring-blue-800'}`}
                     >
-                      <option value="">Sélectionnez un sujet</option>
-                      <option value="Projet">Proposition de projet</option>
-                      <option value="Emploi">Opportunité d'emploi</option>
-                      <option value="Stage">Proposition de stage/alternance</option>
-                      <option value="Question">Question technique</option>
-                      <option value="Autre">Autre</option>
+                      <option value="">{language === 'fr' ? "Sélectionnez un sujet" : "Select a subject"}</option>
+                      <option value="Projet">{language === 'fr' ? "Proposition de projet" : "Project proposal"}</option>
+                      <option value="Emploi">{language === 'fr' ? "Opportunité d'emploi" : "Job opportunity"}</option>
+                      <option value="Stage">{language === 'fr' ? "Proposition de stage/alternance" : "Internship proposal"}</option>
+                      <option value="Question">{language === 'fr' ? "Question technique" : "Technical question"}</option>
+                      <option value="Autre">{language === 'fr' ? "Autre" : "Other"}</option>
                     </select>
                     {errors.subject && <p className="mt-1 text-red-500 text-sm">{errors.subject}</p>}
                   </div>
                   
                   <div>
-                    <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message *</label>
+                    <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                      {messages.contact.message} *
+                    </label>
                     <textarea
                       id="message"
-                      name="message" 
+                      name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
                       className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-gray-800 dark:text-gray-200 font-medium dark:bg-gray-700 dark:border-gray-600 ${errors.message ? 'border-red-400 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200 dark:focus:ring-blue-800'}`}
-                      placeholder="Votre message"
+                      placeholder={language === 'fr' ? "Votre message" : "Your message"}
                     ></textarea>
                     {errors.message && <p className="mt-1 text-red-500 text-sm">{errors.message}</p>}
                   </div>
@@ -297,11 +334,11 @@ const Contact = () => {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Envoi en cours...
+                        {language === 'fr' ? "Envoi en cours..." : "Sending..."}
                       </>
                     ) : (
                       <>
-                        <FaPaperPlane className="mr-2" /> Envoyer le message
+                        <FaPaperPlane className="mr-2" /> {messages.contact.send}
                       </>
                     )}
                   </motion.button>

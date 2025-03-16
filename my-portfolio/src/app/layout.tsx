@@ -5,6 +5,7 @@ import "./globals.css";
 import defaultMetadata from "./metadata";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 export const metadata = defaultMetadata;
 
@@ -20,8 +21,10 @@ export default function RootLayout({
         className={`${geistSans} ${geistMono} ${novaMono} antialiased bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-200`}
       >
         <ThemeProvider>
-          {children}
-          <ScrollToTopButton />
+          <LanguageProvider>
+            {children}
+            <ScrollToTopButton />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

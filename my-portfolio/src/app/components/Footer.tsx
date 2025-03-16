@@ -1,13 +1,19 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { FaLinkedin, FaGithub, FaEnvelope, FaArrowUp } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp, FaHeart } from "react-icons/fa";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Footer = () => {
+  const { language, messages } = useLanguage();
+  
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const currentYear = new Date().getFullYear();
@@ -34,7 +40,9 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Data Analyst & Développeur Full Stack. Étudiant en BUT Informatique, passionné par les nouvelles technologies, l'IA et le développement web.
+              {language === 'fr' 
+                ? "Data Analyst & Développeur Full Stack. Étudiant en BUT Informatique, passionné par les nouvelles technologies, l'IA et le développement web."
+                : "Data Analyst & Full Stack Developer. BUT Computer Science student, passionate about new technologies, AI, and web development."}
             </motion.p>
             <motion.div 
               className="flex space-x-4"
@@ -60,7 +68,7 @@ const Footer = () => {
                 <FaGithub size={18} />
               </a>
               <a 
-                href="mailto:contact@kylian-gachet.fr"
+                href="mailto:kyliangachet@gmail.com"
                 className="bg-gray-700 hover:bg-blue-600 p-3 rounded-full transition-colors duration-300"
               >
                 <FaEnvelope size={18} />
@@ -76,31 +84,33 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h3 className="text-lg font-semibold mb-4">Navigation</h3>
+            <h3 className="text-lg font-semibold mb-4">
+              {language === 'fr' ? "Navigation" : "Navigation"}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/#intro" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Accueil
+                  {messages.navigation.home}
                 </Link>
               </li>
               <li>
                 <Link href="/#education" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Formation
+                  {messages.navigation.education}
                 </Link>
               </li>
               <li>
                 <Link href="/#skills" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Compétences
+                  {messages.navigation.skills}
                 </Link>
               </li>
               <li>
                 <Link href="/#projects" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Projets
+                  {messages.navigation.projects}
                 </Link>
               </li>
               <li>
                 <Link href="/#contact" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Contact
+                  {messages.navigation.contact}
                 </Link>
               </li>
             </ul>
@@ -114,22 +124,24 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <h3 className="text-lg font-semibold mb-4">
+              {messages.navigation.contact}
+            </h3>
             <address className="not-italic space-y-2 text-gray-300">
               <p className="flex items-center">
                 <span className="font-medium">Email:</span>
-                <a href="mailto:contact@kylian-gachet.fr" className="ml-2 hover:text-white transition-colors duration-300">
-                  contact@kylian-gachet.fr
+                <a href="mailto:kyliangachet@gmail.com" className="ml-2 hover:text-white transition-colors duration-300">
+                  kyliangachet@gmail.com
                 </a>
               </p>
               <p className="flex items-center">
-                <span className="font-medium">Téléphone:</span>
+                <span className="font-medium">{language === 'fr' ? "Téléphone:" : "Phone:"}</span>
                 <a href="tel:+33662610084" className="ml-2 hover:text-white transition-colors duration-300">
                   +33 6 62 61 00 84
                 </a>
               </p>
               <p className="flex items-center">
-                <span className="font-medium">Localisation:</span>
+                <span className="font-medium">{language === 'fr' ? "Localisation:" : "Location:"}</span>
                 <span className="ml-2">Toulouse, France</span>
               </p>
             </address>
@@ -141,13 +153,13 @@ const Footer = () => {
           <button 
             onClick={scrollToTop}
             className="mb-6 inline-block bg-blue-600 hover:bg-blue-700 p-3 rounded-full transition-colors duration-300 animate-bounce-slow"
-            aria-label="Retour en haut"
+            aria-label={language === 'fr' ? "Retour en haut" : "Back to top"}
           >
             <FaArrowUp size={18} />
           </button>
           <div className="border-t border-gray-700 pt-8">
             <p className="text-sm text-gray-400 text-center">
-              &copy;{currentYear} Kylian Gachet. Tous droits réservés.
+              &copy;{currentYear} Kylian Gachet. {language === 'fr' ? "Tous droits réservés." : "All rights reserved."}
             </p>
           </div>
         </div>

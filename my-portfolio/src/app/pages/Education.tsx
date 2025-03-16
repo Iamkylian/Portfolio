@@ -4,10 +4,12 @@ import { useState } from "react";
 import { educationItems } from "../educations";
 import { motion } from "framer-motion";
 import { FaGraduationCap, FaBriefcase, FaCertificate, FaFilter } from "react-icons/fa";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Education() {
   const [isHovered, setIsHovered] = useState(false);
   const [filters, setFilters] = useState<string[]>(['education', 'professional', 'certification']);
+  const { language, messages } = useLanguage();
 
   const toggleFilter = (filter: string) => {
     if (filters.includes(filter)) {
@@ -33,12 +35,24 @@ export default function Education() {
   // Filtrer les éléments en fonction des filtres actifs
   const filteredItems = educationItems.filter(item => filters.includes(item.type));
 
+  // Traductions pour les labels des filtres
+  const filterLabels = {
+    education: language === 'fr' ? 'Formation' : 'Education',
+    professional: language === 'fr' ? 'Expérience' : 'Experience',
+    certification: language === 'fr' ? 'Certification' : 'Certification'
+  };
+
   return (
     <section id="education" className="py-20 bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl text-gray-700 dark:text-gray-200 font-bold mb-4 text-center">Mon Parcours</h2>
+        <h2 className="text-3xl text-gray-700 dark:text-gray-200 font-bold mb-4 text-center">
+          {messages?.education?.title || "Mon Parcours"}
+        </h2>
         <p className="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mb-8">
-          Découvrez mon parcours académique, mes expériences professionnelles et mes certifications
+          {language === 'fr' 
+            ? "Découvrez mon parcours académique, mes expériences professionnelles et mes certifications"
+            : "Discover my academic journey, professional experiences and certifications"
+          }
         </p>
         <div className="w-40 h-1 mx-auto mb-10 rounded-full transition-colors duration-300" style={{ backgroundColor: isHovered ? '#0077b5' : '#6b7280'}}></div>
         
@@ -52,7 +66,7 @@ export default function Education() {
                 : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 opacity-60'
             }`}
           >
-            <FaGraduationCap /> Formation
+            <FaGraduationCap /> {filterLabels.education}
           </button>
           <button 
             onClick={() => toggleFilter('professional')}
@@ -62,7 +76,7 @@ export default function Education() {
                 : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 opacity-60'
             }`}
           >
-            <FaBriefcase /> Expérience
+            <FaBriefcase /> {filterLabels.professional}
           </button>
           <button 
             onClick={() => toggleFilter('certification')}
@@ -72,7 +86,7 @@ export default function Education() {
                 : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 opacity-60'
             }`}
           >
-            <FaCertificate /> Certification
+            <FaCertificate /> {filterLabels.certification}
           </button>
         </div>
 
@@ -106,7 +120,9 @@ export default function Education() {
                     item.type === 'professional' ? 'border-l-4 border-green-500' : 
                     'border-l-4 border-yellow-500'}`}>
                   <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-3">
-                    <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{item.title}</h3>
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                      {language === 'fr' ? item.title : item.titleEn || item.title}
+                    </h3>
                     <span className={`text-sm font-medium mt-1 md:mt-0 px-3 py-1 rounded-full 
                       ${item.type === 'education' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 
                         item.type === 'professional' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 
@@ -114,8 +130,12 @@ export default function Education() {
                       {item.dates}
                     </span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 font-medium mb-3">{item.institution}</p>
-                  <p className="text-gray-500 dark:text-gray-400">{item.description}</p>
+                  <p className="text-gray-600 dark:text-gray-400 font-medium mb-3">
+                    {language === 'fr' ? item.institution : item.institutionEn || item.institution}
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-400">
+                    {language === 'fr' ? item.description : item.descriptionEn || item.description}
+                  </p>
                 </div>
               </motion.div>
             ))}

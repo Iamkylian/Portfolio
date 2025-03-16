@@ -1,0 +1,55 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "education": "Parcours",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "common": {
+    "languageSelector": "Changer de langue",
+    "theme": "Thème",
+    "scrollTop": "Retour en haut",
+    "contactMe": "Me contacter",
+    "downloadCv": "Télécharger CV"
+  },
+  "hero": {
+    "title": "Développeur Web & Mobile",
+    "subtitle": "Concepteur & Développeur d'applications modernes",
+    "description": "Développeur passionné spécialisé dans la création d'applications web et mobiles modernes avec les dernières technologies."
+  },
+  "education": {
+    "title": "Mon Parcours",
+    "subtitle": "Formation & Expérience"
+  },
+  "skills": {
+    "title": "Mes Compétences",
+    "subtitle": "Technologies & Outils",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "mobile": "Mobile",
+    "other": "Autres"
+  },
+  "projects": {
+    "title": "Mes Projets",
+    "subtitle": "Découvrez mes créations",
+    "viewProject": "Voir le projet",
+    "viewCode": "Voir le code"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Travaillons ensemble",
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "send": "Envoyer",
+    "required": "Requis",
+    "validEmail": "Email valide requis",
+    "success": "Message envoyé avec succès !",
+    "error": "Erreur lors de l'envoi du message."
+  },
+  "footer": {
+    "rights": "Tous droits réservés",
+    "madeWith": "Fait avec"
+  }
+} 

@@ -6,9 +6,12 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projects, Project } from '../projects';
 import { FaGithub, FaFilter, FaUniversity, FaLaptopCode, FaTimes, FaChevronRight } from 'react-icons/fa';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Composant pour afficher une carte de projet
 const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ project, onClick }) => {
+  const { language } = useLanguage();
+  
   return (
     <motion.div
       className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer h-full flex flex-col"
@@ -20,7 +23,7 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={project.image}
-          alt={project.title}
+          alt={language === 'fr' ? project.title : (project.titleEn || project.title)}
           fill
           style={{ objectFit: 'cover' }}
           className="transition-transform duration-500 hover:scale-110"
@@ -32,15 +35,22 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
               <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                 project.type === 'university' ? 'bg-green-600' : 'bg-purple-600'
               }`}>
-                {project.type === 'university' ? 'Universitaire' : 'Personnel'}
+                {project.type === 'university' 
+                  ? (language === 'fr' ? 'Universitaire' : 'Academic') 
+                  : (language === 'fr' ? 'Personnel' : 'Personal')
+                }
               </span>
             </div>
           </div>
         </div>
       </div>
       <div className="p-5 flex-grow">
-        <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-200">{project.title}</h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">{project.description}</p>
+        <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-200">
+          {language === 'fr' ? project.title : (project.titleEn || project.title)}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+          {language === 'fr' ? project.description : (project.descriptionEn || project.description)}
+        </p>
         <div className="flex flex-wrap gap-1 mb-3">
           {project.technologies.slice(0, 3).map((tech, index) => (
             <span key={index} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
@@ -61,145 +71,160 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
           ))}
         </div>
         <button className="text-blue-600 dark:text-blue-400 flex items-center text-sm font-medium hover:underline">
-          Voir plus <FaChevronRight className="ml-1" size={12} />
+          {language === 'fr' ? "Voir plus" : "See more"} <FaChevronRight className="ml-1" size={12} />
         </button>
       </div>
     </motion.div>
   );
 };
 
-// Composant pour afficher la modale avec les détails du projet
-const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ project, onClose }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm"
-    onClick={onClose}
-  >
+// Composant pour afficher le modal de projet
+const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ project, onClose }) => {
+  const { language } = useLanguage();
+  
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } }
+  };
+
+  return (
     <motion.div
-      initial={{ scale: 0.9, opacity: 0, y: 20 }}
-      animate={{ scale: 1, opacity: 1, y: 0 }}
-      exit={{ scale: 0.9, opacity: 0, y: 20 }}
-      transition={{ type: "spring", damping: 25, stiffness: 500 }}
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-      onClick={(e) => e.stopPropagation()}
+      className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
     >
-      <div className="relative h-64 md:h-80 w-full">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          style={{ objectFit: 'cover' }}
-          className="rounded-t-xl"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent/30 flex flex-col justify-end p-6">
-          <div className="flex space-x-2 mb-3">
-            <span className="px-3 py-1 text-sm font-medium bg-blue-600 text-white rounded-full">
-              {project.date}
-            </span>
-            <span className={`px-3 py-1 text-sm font-medium rounded-full text-white ${
-              project.type === 'university' ? 'bg-green-600' : 'bg-purple-600'
-            }`}>
-              {project.type === 'university' ? 'Universitaire' : 'Personnel'}
-            </span>
-          </div>
-          <h2 className="text-3xl font-bold text-white mb-2">{project.title}</h2>
-          <div className="flex flex-wrap gap-2">
-            {project.skills.map((skillId) => {
-              const skillName = {
-                "1": "Développement",
-                "2": "Données",
-                "3": "Analyse",
-                "4": "Projet",
-                "5": "Admin",
-                "6": "Équipe"
-              }[skillId];
-              return (
-                <Link href={`/skills/${["developpement-applications", "gestion-donnees", "analyse-optimisation", "conduite-projet", "administration", "gestion-equipe-informatique"][parseInt(skillId) - 1]}`} key={skillId}>
-                  <span className="px-3 py-1 text-xs bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors cursor-pointer">
-                    {skillName}
-                  </span>
-                </Link>
-              );
-            })}
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col"
+        variants={modalVariants}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="relative h-64 sm:h-80 w-full">
+          <Image
+            src={project.image}
+            alt={language === 'fr' ? project.title : (project.titleEn || project.title)}
+            fill
+            style={{ objectFit: 'cover' }}
+            priority={true}
+          />
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            aria-label="Fermer"
+          >
+            <FaTimes size={20} />
+          </button>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+            <div className="flex flex-wrap gap-2 mb-3">
+              <span className="px-3 py-1 text-xs font-medium bg-blue-600 text-white rounded-full">
+                {project.date}
+              </span>
+              <span className={`px-3 py-1 text-xs font-medium text-white rounded-full ${
+                project.type === 'university' ? 'bg-green-600' : 'bg-purple-600'
+              }`}>
+                {project.type === 'university' 
+                  ? (language === 'fr' ? 'Universitaire' : 'Academic') 
+                  : (language === 'fr' ? 'Personnel' : 'Personal')
+                }
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+              {language === 'fr' ? project.title : (project.titleEn || project.title)}
+            </h2>
           </div>
         </div>
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm hover:bg-white/40 text-white rounded-full p-2 transition-colors"
-        >
-          <FaTimes size={18} />
-        </button>
-      </div>
-
-      <div className="p-6 md:p-8">
-        <div className="mb-8">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Description</h3>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.longDescription || project.description}</p>
-        </div>
-
-        {project.context && (
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Contexte</h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.context}</p>
-          </div>
-        )}
-
-        {project.objectives && (
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Objectifs</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-              {project.objectives.map((objective, index) => (
-                <li key={index} className="leading-relaxed">{objective}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {project.methodology && (
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Méthodologie</h3>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.methodology}</p>
-          </div>
-        )}
-
-        {project.results && (
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Résultats</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-              {project.results.map((result, index) => (
-                <li key={index} className="leading-relaxed">{result}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <div className="mb-8">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Technologies</h3>
-          <div className="flex flex-wrap gap-2">
+        <div className="p-6 overflow-y-auto flex-grow">
+          <div className="flex flex-wrap gap-2 mb-6">
             {project.technologies.map((tech, index) => (
-              <span key={index} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full text-sm">
+              <span key={index} className="px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full">
                 {tech}
               </span>
             ))}
           </div>
+          <div className="prose prose-blue dark:prose-invert max-w-none mb-6">
+            <p className="text-gray-700 dark:text-gray-300">
+              {language === 'fr' ? project.longDescription || project.description : (project.longDescriptionEn || project.descriptionEn || project.description)}
+            </p>
+            
+            {project.context && (
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                  {language === 'fr' ? 'Contexte' : 'Context'}
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300">
+                  {language === 'fr' ? project.context : (project.contextEn || project.context)}
+                </p>
+              </div>
+            )}
+            
+            {project.objectives && project.objectives.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                  {language === 'fr' ? 'Objectifs' : 'Objectives'}
+                </h3>
+                <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
+                  {(language === 'fr' ? project.objectives : (project.objectivesEn || project.objectives)).map((objective, index) => (
+                    <li key={index}>{objective}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            
+            {project.methodology && (
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                  {language === 'fr' ? 'Méthodologie' : 'Methodology'}
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300">
+                  {language === 'fr' ? project.methodology : (project.methodologyEn || project.methodology)}
+                </p>
+              </div>
+            )}
+            
+            {project.results && project.results.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                  {language === 'fr' ? 'Résultats' : 'Results'}
+                </h3>
+                <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
+                  {(language === 'fr' ? project.results : (project.resultsEn || project.results)).map((result, index) => (
+                    <li key={index}>{result}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
-
-        <div className="flex justify-center mt-10">
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 py-3 transition-colors shadow-md"
-          >
-            <FaGithub size={20} /> Voir le code source
-          </a>
+        <div className="p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+          <div className="flex flex-wrap gap-4 justify-center sm:justify-end">
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 py-3 transition-colors shadow-md"
+              >
+                <FaChevronRight size={16} /> {language === 'fr' ? 'Voir la démo' : 'View Demo'}
+              </a>
+            )}
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 py-3 transition-colors shadow-md"
+            >
+              <FaGithub size={20} /> {language === 'fr' ? 'Voir le code source' : 'View Source Code'}
+            </a>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
-  </motion.div>
-);
+  );
+};
 
 // Composant principal pour afficher le portfolio
 const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
@@ -207,17 +232,22 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [filters, setFilters] = useState<string[]>(['university', 'personal']);
   const [searchTerm, setSearchTerm] = useState("");
+  const { language, messages } = useLanguage();
 
   // Filtrer les projets en fonction des filtres et des compétences sélectionnées
   const filteredProjects = projects
     .filter(project => skills ? project.skills.includes(skills) : true)
     .filter(project => filters.includes(project.type))
-    .filter(project => 
-      searchTerm === "" || 
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+    .filter(project => {
+      if (searchTerm === "") return true;
+      
+      const searchLower = searchTerm.toLowerCase();
+      const titleMatch = (language === 'fr' ? project.title : (project.titleEn || project.title)).toLowerCase().includes(searchLower);
+      const descMatch = (language === 'fr' ? project.description : (project.descriptionEn || project.description)).toLowerCase().includes(searchLower);
+      const techMatch = project.technologies.some(tech => tech.toLowerCase().includes(searchLower));
+      
+      return titleMatch || descMatch || techMatch;
+    });
 
   // Trier les projets: d'abord les projets mis en avant, puis par date décroissante
   const sortedProjects = [...filteredProjects].sort((a, b) => {
@@ -238,11 +268,13 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">Mes Projets</h2>
+    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <div className="container mx-auto px-6">
+        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">
+          {messages.projects.title}
+        </h2>
         <p className="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mb-8">
-          Découvrez les projets sur lesquels j'ai travaillé, tant dans le cadre universitaire que personnel
+          {messages.projects.subtitle}
         </p>
         <div className="w-40 h-1 mx-auto mb-12 rounded-full transition-colors duration-300" style={{ backgroundColor: isHovered ? '#0077b5' : '#6b7280'}}></div>
 
@@ -257,7 +289,7 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
               }`}
             >
-              <FaUniversity /> Universitaires
+              <FaUniversity /> {language === 'fr' ? 'Universitaires' : 'Academic'}
             </button>
             <button
               onClick={() => toggleFilter('personal')}
@@ -267,14 +299,14 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
               }`}
             >
-              <FaLaptopCode /> Personnels
+              <FaLaptopCode /> {language === 'fr' ? 'Personnels' : 'Personal'}
             </button>
           </div>
           <div className="w-full md:w-auto">
             <div className="relative">
               <input
                 type="text"
-                placeholder="Rechercher..."
+                placeholder={language === 'fr' ? "Rechercher..." : "Search..."}
                 className="px-4 py-2 pl-10 rounded-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-64"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -309,7 +341,12 @@ const Portfolio: React.FC<{ skills?: string }> = ({ skills }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <p className="text-gray-500 dark:text-gray-400 text-lg">Aucun projet ne correspond à vos critères de recherche.</p>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">
+                  {language === 'fr' 
+                    ? "Aucun projet ne correspond à vos critères de recherche."
+                    : "No projects match your search criteria."
+                  }
+                </p>
               </motion.div>
             )}
           </AnimatePresence>

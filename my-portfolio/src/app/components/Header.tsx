@@ -2,17 +2,20 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaBars, FaTimes, FaDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaBars, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
+import LanguageSelector from "./LanguageSelector";
 import { useTheme } from "../contexts/ThemeContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("intro");
   const [scrollPosition, setScrollPosition] = useState(0);
   const { theme } = useTheme();
-
+  const { language, messages } = useLanguage();
+  
   useEffect(() => {
     const handleScroll = () => {
       const position = window.scrollY;
@@ -59,6 +62,7 @@ const Header = () => {
         
         <div className="md:hidden flex items-center">
           <ThemeToggle />
+          <LanguageSelector />
           <button onClick={toggleMenu} className="ml-3 focus:outline-none text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors">
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
@@ -75,10 +79,10 @@ const Header = () => {
           transition={{ duration: 0.5, staggerChildren: 0.1 }}
         >
           {[
-            { href: "#education", label: "Parcours" },
-            { href: "#skills", label: "Compétences" },
-            { href: "#projects", label: "Projets" },
-            { href: "#contact", label: "Contact" }
+            { href: "#education", label: messages?.navigation?.education || "Parcours" },
+            { href: "#skills", label: messages?.navigation?.skills || "Compétences" },
+            { href: "#projects", label: messages?.navigation?.projects || "Projets" },
+            { href: "#contact", label: messages?.navigation?.contact || "Contact" }
           ].map((item) => (
             <motion.div
               key={item.href}
@@ -104,6 +108,7 @@ const Header = () => {
           
           <div className="flex md:space-x-4 space-y-4 md:space-y-0 mt-4 md:mt-0 flex-col md:flex-row items-center">
             <ThemeToggle />
+            <LanguageSelector />
             <a
               href="https://github.com/Iamkylian"
               target="_blank"
