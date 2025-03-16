@@ -9,13 +9,12 @@ import ThemeToggle from "../components/ThemeToggle";
 import { useTheme } from "../contexts/ThemeContext";
 
 const jobLangages = [
-  "Développeur Full Stack", // Français
-  "Data Analyst", // Français
-  "Full Stack Developer", // Anglais
-  "フルスタック開発者", // Japonais
-  "Full-Stack-Entwickler", // Allemand
-  "Desarrollador Full Stack", // Espagnol
-  "풀스택 개발자", // Coréen
+  "Développeur", // Français
+  "Developer", // Anglais
+  "開発者", // Japonais
+  "Entwickler", // Allemand
+  "Desarrollador", // Espagnol
+  "개발자" // Coréen
 ];
 
 // Kanji Characters to fall
@@ -171,7 +170,7 @@ export default function Intro() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
             >
-              Passionné par le développement et la cybersécurité, je suis actuellement <span className="font-semibold">Data Analyst en alternance chez Airbus</span>. En parallèle, j'étudie l'informatique à l'IUT de Blagnac en <span className="font-semibold">BUT Informatique</span>, où je développe mes compétences techniques et ma vision globale des projets.
+              Passionné par le développement, la data science et la cybersécurité, je suis actuellement <span className="font-semibold">Data Analyst en alternance chez Airbus</span>. En parallèle, j'étudie l'informatique à l'IUT de Blagnac en <span className="font-semibold">BUT Informatique</span>, où je développe mes compétences techniques et ma vision globale des projets.
             </motion.p>
 
             <motion.div 
@@ -209,7 +208,7 @@ export default function Intro() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">Data Analyst - Airbus</h3>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 ml-14">2023 - 2025 | Alternance</p>
+              <p className="text-gray-600 dark:text-gray-400 ml-14">2023 - Présent | Alternance</p>
               <p className="text-gray-600 dark:text-gray-400 ml-14 mt-2">
                 Conception d'un outil d'approbation d'offres commerciales et traitement ETL des données du DataHub pour fournir des indicateurs aux équipes business.
               </p>
@@ -222,7 +221,7 @@ export default function Intro() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">BUT Informatique</h3>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 ml-14">2022 - 2025 | IUT de Blagnac</p>
+              <p className="text-gray-600 dark:text-gray-400 ml-14">2022 - Présent | IUT de Blagnac, Université Toulouse 2 Jean Jaurès</p>
               <p className="text-gray-600 dark:text-gray-400 ml-14 mt-2">
                 Formation technique complète couvrant le développement d'applications, la gestion des données, l'analyse et optimisation, la conduite de projet, l'administration des systèmes et réseaux, et la gestion d'équipe informatique.
               </p>

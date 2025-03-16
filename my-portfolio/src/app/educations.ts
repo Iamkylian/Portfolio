@@ -2,7 +2,7 @@
 export const educationItems = [
   {
     title: "BUT Informatique",
-    institution: "IUT de Blagnac",
+    institution: "IUT de Blagnac, Université Toulouse 2 Jean Jaurès",
     dates: "Septembre 2022 - Présent",
     description:
       "Formation complète en informatique couvrant le développement logiciel, les bases de données, les réseaux et la gestion de projet. Formation réalisée en alternance.",

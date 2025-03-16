@@ -34,7 +34,7 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Data Analyst & Développeur Full Stack. Étudiant en BUT Informatique, passionné par les nouvelles technologies, l'IA et le développement web.
+              Data Analyst chez Airbus. Étudiant en BUT Informatique, passionné par les nouvelles technologies, le développement et la cybersécurité.
             </motion.p>
             <motion.div 
               className="flex space-x-4"
@@ -60,7 +60,7 @@ const Footer = () => {
                 <FaGithub size={18} />
               </a>
               <a 
-                href="mailto:contact@kylian-gachet.fr"
+                href="mailto:kyliangachet@gmail.com"
                 className="bg-gray-700 hover:bg-blue-600 p-3 rounded-full transition-colors duration-300"
               >
                 <FaEnvelope size={18} />
@@ -118,8 +118,8 @@ const Footer = () => {
             <address className="not-italic space-y-2 text-gray-300">
               <p className="flex items-center">
                 <span className="font-medium">Email:</span>
-                <a href="mailto:contact@kylian-gachet.fr" className="ml-2 hover:text-white transition-colors duration-300">
-                  contact@kylian-gachet.fr
+                <a href="mailto:kyliangachet@gmail.com" className="ml-2 hover:text-white transition-colors duration-300">
+                  kyliangachet@gmail.com
                 </a>
               </p>
               <p className="flex items-center">

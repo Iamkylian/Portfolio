@@ -143,8 +143,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-1">Email</h4>
-                    <a href="mailto:contact@kylian-gachet.fr" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                      contact@kylian-gachet.fr
+                    <a href="mailto:kyliangachet@gmail.com" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      kyliangachet@gmail.com
                     </a>
                   </div>
                 </div>
@@ -178,7 +178,7 @@ const Contact = () => {
                 <h4 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">Me suivre</h4>
                 <div className="flex space-x-4">
                   <a 
-                    href="https://linkedin.com/in/kylian-gachet" 
+                    href="https://linkedin.com/in/kyliangachet" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-blue-100 dark:bg-blue-900 hover:bg-blue-600 text-blue-600 dark:text-blue-300 hover:text-white p-3 rounded-full transition-all duration-300"
